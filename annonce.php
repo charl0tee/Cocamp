@@ -31,14 +31,50 @@
 			echo $titre[0]."<br />"; 
 			
 			
-			// fonction pour convertir la date en format français
+			// fonction pour convertir la date en format français et en format texte
 			function datefr($date) { 
-				$split = split("-",$date); 
+				$split = explode("-",$date); 
 				$annee = $split[0]; 
 				$mois = $split[1]; 
 				$jour = $split[2];
-				$moisfr = array("","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
-				return "$jour"." "."$moisfr[$mois]"." "."$annee"; 
+				switch ($mois){
+			        case 01:
+		                $moistxt = ' janvier ';
+		                break;
+					case 02:
+		                $moistxt = ' février ';
+		                break;
+			        case 03:
+		                $moistxt = ' mars ';
+		                break;
+			        case 04:
+		                $moistxt = ' avril ';
+		                break;
+			        case 05:
+		                $moistxt = ' mai ';
+		                break;
+			        case 06:
+		                $moistxt = ' juin ';
+		                break;
+			        case 07:
+		                $moistxt = ' juillet ';
+		                break;
+			        case 08:
+		                $moistxt = ' août ';
+		                break;
+			        case 09:
+		                $moistxt = ' septembre ';
+		                break;
+			        case 10:
+		                $moistxt = ' octobre ';
+		                break;
+					case 11:
+		                $moistxt = ' novembre ';
+		                break;
+					case 12:
+		                $moistxt = ' décembre ';
+				}
+				return "$jour"." "."$moistxt"." "."$annee";
 			}
 			
 			// On récupère la date de l'annonce sélectionnée
@@ -55,7 +91,7 @@
 			// On affiche le nom et prénom du membre et la date de l'annonce sélectionnée
 			echo "Cette annonce a été postée par ".$membre[2]." ".$membre[1]." le ".datefr($dateAnn[0])."<br />";
 			
-			// On stocke dans une variable l'id du membre qui a posté l'annonce
+			// On stocke l'id du membre qui a posté l'annonce
 			$idMembre = $membre[0];
 			
 			//afficher l'image de l'annonce sélectionnée 
@@ -102,7 +138,7 @@
 			echo "Description :<br />".$descr[0];	
 		
 		
-			echo "<a href='envoi_message.php?id=".$idMembre."'>Contacter l'annonceur</a><br />";
+			echo "<br /><a href='envoi_message.php?id=".$idMembre."'>Contacter l'annonceur</a><br />";
 			
 			if($_SESSION['mail'] == $membre[2]){
 				echo "<a href='modif_ann.php?id=".$idSelect."'>Modifier l'annonce</a><br/>";

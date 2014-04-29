@@ -1,6 +1,4 @@
-<?php
-	session_start();
-?>
+<?php session_start (); ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,40 +7,39 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
-		<div id="header">
-		</div>
-		<div id="content">
 		<?php
 			//Connexion à la base de données
 			include("connect_bdd.php");
 
 			mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
-			
-			//Requête pour afficher les données du membre
-			$requet_membre="SELECT NomMembre, PrenomMembre, MailMembre, ScolMembre, AgeMembre, PhotoMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
+
+			// Requête pour récupérer l'id du membre qui a envoyé les messages
+			$requet_membre="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
 			$result_membre=mysql_query($requet_membre) or die("Erreur de base de données.");
-			$membre=mysql_fetch_row($result_membre);	
-			echo "Prénom : ".$membre[1]."<br /> Nom : ".$membre[0]."<br /> Mail : ".$membre[2]."<br /> Scolarité : ".$membre[3]."<br /> Age : ".$membre[4]."<br />";
-			echo "<img src='imgProfil/".$membre[5].".jpg'/><br />";
+			$membre=mysql_fetch_row($result_membre);
 
-
-
-			echo "Mes annonces<br/>";
-			
-			// On effectue les requêtes afin d'afficher les annonces postées par le membre			
-			$requet = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image, Membre WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND Membre.IdMembre=Annonce.IdMembre AND Membre.MailMembre='".$_SESSION['mail']."'";
+			// On effectue une requête afin d'afficher les messages envoyés par le membre		
+			$requet = "SELECT * FROM Message WHERE IdSender='".$membre[0]."'";
 			$result = mysql_query($requet) or die ("Erreur de la base de données.");
 
 			while($affiche = mysql_fetch_row($result)) {
-				// le lien renvoie vers l'annonce sélectionnée grâce à l'ID récupéré par la méthode GET
-				echo "<a href='annonce.php?id=".$affiche[0]."'>".$affiche[1]." - ".$affiche[3]."<br />".datefr($affiche[6])." - ".$affiche[5]."<br />".$affiche[2]." €<br />".$affiche[4]."</a> <br />";
-				echo "<img src='imgAnnonce/".$affiche[7].".jpg'/><br />";
-				
+				// Requête pour récupérer le nom et prénom du membre qui a recu le message
+				$requet_receiver="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche[2]."'";
+				$result_receiver=mysql_query($requet_receiver) or die("Erreur de base de données.");
+				$receiver=mysql_fetch_row($result_receiver);
+
+				// on affiche qu'une partie du message
+				$messagecoupe=substr($affiche[3], 0, 10);
+
+				// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
+				echo "<a href='message.php?id=".$affiche[0]."'>Message envoyé le ".datefr($affiche[4])." - À ".$receiver[1]." ".$receiver[0]." - ".$messagecoupe."</a><br />";	
 			}
 			
 			// fonction pour convertir la date en format français et en format texte
 			function datefr($date) { 
-				$split = explode("-",$date); 
+				$splitTime = explode(" ",$date); 
+
+				$split = explode("-", $splitTime[0]);
 				$annee = $split[0]; 
 				$mois = $split[1]; 
 				$jour = $split[2];
@@ -83,11 +80,8 @@
 					case 12:
 		                $moistxt = ' décembre ';
 				}
-				return "$jour"." "."$moistxt"." "."$annee";
+				return "$jour"." "."$moistxt"." "."$annee"." à "."$splitTime[1]";
 			}
 		?>
-		</div>
-		<div id="footer">
-		</div>
 	</body>
 </html>

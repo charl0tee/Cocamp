@@ -58,7 +58,7 @@
 					<h2>Annonce</h2> 
 					<p>Titre : <input type='text' name='TitreAnn' value='".$affiche[1]."'/></p>
 					<p>Description :<br /> <textarea rows='10' cols='50' name='DescrAnn'>".$affiche[2]."</textarea></p>	
-					<p>Prix : <input type='number' name='PrixAnn'/>".$affiche[3]." €</p>
+					<p>Prix : <input type='number' name='PrixAnn' value='".$affiche[3]."'/>€</p>
 				
 					<input type='submit' name='Valider' value='Valider'/>";
 					
@@ -78,7 +78,7 @@
 							$resultLocalisation=mysql_query($requetLocalisation) or die("erreur requête".mysql_error());
 							$idLocal=mysql_fetch_row($resultLocalisation);
 
-							$requetannonce="UPDATE Annonce SET TitreAnn='".mysql_real_escape_string($TitreAnn)."', PrixAnn='".$PrixAnn."', DescrAnn='".mysql_real_escape_string($DescrAnn)."', CatAnn='".$Categorie."', IdLocal='".$idLocal."' WHERE IdAnn='".$idSelect."'";	
+							$requetannonce="UPDATE Annonce SET TitreAnn='".mysql_real_escape_string($TitreAnn)."', PrixAnn='".$PrixAnn."', DescrAnn='".mysql_real_escape_string($DescrAnn)."', CatAnn='".$Categorie."', IdLocal='".$idLocal[0]."' WHERE IdAnn='".$idSelect."'";	
 							mysql_query($requetannonce) or die("erreur requête".mysql_error());
 							
 							echo "<br />Votre annonce a été modifiée avec succès <br />";
