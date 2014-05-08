@@ -2645,3 +2645,36 @@ p.description_content{
 #inscription a:hover {	
 	color: #E84A4A;
 }
+
+/* AJOUT GABI */
+#connexion{
+	float: right;
+	position: relative;
+	top: 5px;
+}
+
+#connexion a{
+	color: #ccc;
+	padding: 0 10px;
+}
+
+#connexion a:hover {
+	color: #E84A4A;
+}
+
+p.description{
+	text-align: justify;
+}
+
+.single_post p{
+	text-align: justify;
+}	
+
+.h4float{
+	float:left;
+}
+
+.pfloat{
+	padding-top: 3px;
+	text-indent: 10px;
+}
