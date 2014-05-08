@@ -2570,7 +2570,30 @@ p.description_content{
 }
 .connect {
 	position: relative;
-	cursor: pointer
+	cursor: pointer;
+}
+
+/* formulaire deconnexion */
+
+#deconnexion a{
+	color: #ccc;
+	padding: 0 10px;
+	cursor: pointer;
+}
+
+#deconnexion a:hover{	
+	color: #E84A4A;
+	cursor: pointer;
+}
+#deconnexion {
+	position: relative;
+	float: right;
+	top: 5px;
+	z-index: 99;
+}
+#deconnexion {
+	position: relative;
+	padding-left: 10px;
 }
 
 .c_form {
@@ -2677,4 +2700,30 @@ p.description{
 .pfloat{
 	padding-top: 3px;
 	text-indent: 10px;
+}
+
+.annonce{
+	color: #7A7A7A;
+	text-indent: 0;
+}
+
+.annonce a{
+	font-weight: bold;
+}
+
+/* Déposer une annonce */
+#poster_ann{
+	float:left;
+	background-color: #E84A4A;
+	border-radius: 5px;
+	position: absolute;
+	right: 70px;
+	top:14px; 
+}
+
+#poster_ann p{
+	font-size: 16px;
+	color: #FFF;
+	padding: 20px;
+	text-transform: uppercase;
 }

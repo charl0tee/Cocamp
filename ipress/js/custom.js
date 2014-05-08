@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
 	jQuery.browser={};(function(){jQuery.browser.msie=false;
 	jQuery.browser.version=0;if(navigator.userAgent.match(/MSIE ([0-9]+)\./)){
 	jQuery.browser.msie=true;jQuery.browser.version=RegExp.$1;}})();
-	$('body').append('<script type="text/javascript" src="customizer/script.js"></script>');
+	// $('body').append('<script type="text/javascript" src="customizer/script.js"></script>');
 
 	// Superfish
 	if ($(".sf-menu")[0]) {

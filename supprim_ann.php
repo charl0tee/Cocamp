@@ -29,7 +29,9 @@
 				$requetSuppr = "DELETE FROM Annonce WHERE IdAnn='".$idSelect."'";
 				$resultSuppr = mysql_query($requetSuppr) or die ("Erreur de la base de données.");
 				
-				echo "<br />Votre annonce a bien été supprimée.";
+				echo "<script>alert('Votre annonce a bien été supprimée.')</script>";
+				// on redirige notre visiteur vers la page d'accueil
+				echo "<script>window.location.replace('ipress/profil.php');</script>";
 			}
 			else{
 				echo "Cette annonce ne vous appartient pas.";

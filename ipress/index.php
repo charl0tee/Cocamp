@@ -32,22 +32,32 @@
 			<div class="a_head">
 				<div class="row clearfix">
 					<div class="right_bar">
-						<div id="connexion">
-							<div class="connect">
-								<a>Se connecter</a>
-							</div>
-							<div class="c_form">
-								<form action="" id="connexionform" method="post">
-									<input id="inputmail" name="connexion" type="text" onfocus="if (this.value=='Email') this.value = '';" onblur="if (this.value=='') this.value = 'Email';" value="Email" placeholder="Email">
-									<input id="inputmdp" name="connexion" type="password" onfocus="if (this.value=='Mot de passe') this.value = '';" onblur="if (this.value=='') this.value = 'Mot de passe';" value="Mot de passe" placeholder="Mot de passe">
-									<button type="submit">Valider</button>
-								</form><!-- /form -->
-							</div><!-- /s form -->
-						</div> <!-- /connexion -->
-						<div id="inscription">
-							<a href="index.html#" class="" title="">S'inscrire</a>
-						</div><!-- /inscription -->
-
+					
+							<?php 
+								session_start();
+								if (!isset($_SESSION['mail'])) {
+									?><div id="connexion">
+										<div class="connect">
+											<a>Se connecter</a>	
+										</div>
+										<div class="c_form">
+											<form action="../login_connect.php" id="connexionform" method="post">
+												<input id="inputmail" name="mail_connect" type="text" onfocus="if (this.value=='Email') this.value = '';" onblur="if (this.value=='') this.value = 'Email';" value="Email" placeholder="Email">
+												<input id="inputmdp" name="mdp_connect" type="password" onfocus="if (this.value=='Mot de passe') this.value = '';" onblur="if (this.value=='') this.value = 'Mot de passe';" value="Mot de passe" placeholder="Mot de passe">
+												<button type="submit">Valider</button>
+											</form><!-- /form -->
+										</div><!-- /s form -->
+									</div> <!-- /connexion --> 
+							<?php
+									echo "<div id='inscription'>
+													<a href='inscription.php' class='' title=''>S'inscrire</a>
+												</div><!-- /inscription -->";
+								}
+								else{
+									echo "<div id='deconnexion'> <a href='profil.php'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
+								}	
+							?>
+						
 						<span id="date_time"></span><!-- /date -->
 					</div><!-- /right bar -->
 				</div><!-- /row -->
@@ -56,8 +66,11 @@
 			<div class="b_head">
 				<div class="row clearfix">
 					<div class="logo">
-						<a href="index.html" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
+						<a href="index.php" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
 					</div><!-- /logo -->
+					<div id="poster_ann">
+						<a href="post_ann.php"><p>Déposer une annonce</p></a>
+					</div>
 				</div><!-- /row -->
 			</div><!-- /b head -->
 
@@ -65,7 +78,7 @@
 				<div class="c_head clearfix">
 					<nav>
 						<ul class="sf-menu">
-							<li class="current colordefault home_class"><a href="index.html"><i class="icon-home"></i></a>
+							<li class="current colordefault home_class"><a href="index.php"><i class="icon-home"></i></a>
 							</li>
 							<li class="color1"><a href="evenements.php">Événements</a>
 							</li>
@@ -339,10 +352,10 @@
 				date = new Date;
 				year = date.getFullYear();
 				month = date.getMonth();
-				months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'Jully', 'August', 'September', 'October', 'November', 'December');
+				months = new Array('Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre');
 				d = date.getDate();
 				day = date.getDay();
-				days = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+				days = new Array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
 				h = date.getHours();
 				if(h<10){
 					h = "0"+h;}

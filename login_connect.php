@@ -31,14 +31,14 @@
 					$_SESSION['prenom']=$prenom[0];
 
 					// on redirige notre visiteur vers la page d'accueil
-					echo "<script>window.location.replace('index.php');</script>";
+					echo "<script>window.location.replace('ipress/index.php');</script>";
 					//header('Location: index.php');
 				}
 				else { echo "Mauvais mail ou mauvais mot de passe. Veuillez réessayer.<br/>";
-					echo "<a href='index.php'>Retour</a>";}
+					echo "<a href='ipress/index.php'>Retour</a>";}
 			}		
 			else { echo "Veuillez remplir tous les champs.<br/>";
-				echo "<a href='index.php'>Retour</a>";}	
+				echo "<a href='ipress/index.php'>Retour</a>";}	
 		?>
 	</body>
 </html>

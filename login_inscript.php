@@ -56,7 +56,7 @@
 
 							//Redirection vers la page d'accueil
 							echo "<script>
-							window.location.replace('index.php');
+							window.location.replace('ipress/index.php');
 							</script> ";
 							
 						}

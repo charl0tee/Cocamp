@@ -1,6 +1,4 @@
 ﻿<?php session_start (); 
-/*ini_set('memory_limit', 8000000);
-set_time_limit(600);*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +25,7 @@ set_time_limit(600);*/
 					if (isset($_FILES['image'])){
 
 						// vérification de la taille
-        				if ($_FILES['monfichier']['size'] <= 1500000){
+        				if ($_FILES['image']['size'] <= 1500000){
 							//ajout de l'annonce dans la BDD
 							$TitreAnn=$_POST['TitreAnn'];
 							$PrixAnn=$_POST['PrixAnn'];
@@ -52,6 +50,8 @@ set_time_limit(600);*/
 							$idAnnonce=mysql_insert_id();
 						
 							echo "Votre annonce a été ajoutée avec succès <br />";
+							// on redirige notre visiteur vers la page de l'annonce
+							echo "<script>window.location.replace('ipress/profil.php');</script>";
 
 						
 							// On déplace l'image dans le dossier imgAnnonce
