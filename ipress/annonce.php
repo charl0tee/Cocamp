@@ -242,7 +242,7 @@
 							<?php  
 								if(!empty($prix)) {
 									// On affiche le prix de l'annonce sélectionnée
-									echo .$prix[0]." €<br />";
+									echo $prix[0]." €<br />";
 								}
 								else{
 									echo "";
