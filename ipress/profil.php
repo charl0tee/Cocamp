@@ -70,14 +70,11 @@
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
 <!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
-<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><!--<![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR"><!--<![endif]-->
 <head>
-	<title>Here's What Instagram Ads Will Look Like</title>
+	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<!-- Seo Meta -->
-		<meta name="description" content="Here's What Instagram Ads Will Look Like">
-		<meta name="keywords" content="iPress, magazine, light, dark, themeforest, multi purpose, premium, unlimited, blog, news, AD, optimized">
 
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
@@ -88,7 +85,6 @@
 
 	<!-- Favicon -->
 		<link rel="shortcut icon" href="images/favicon.ico">
-		<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
 	<!--[if IE]>
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=EmulateIE8; IE=EDGE" />
@@ -103,7 +99,6 @@
 					<div class="right_bar">
 					
 							<?php 
-								
 								if (!isset($_SESSION['mail'])) {
 									?><div id="connexion">
 										<div class="connect">
@@ -119,8 +114,8 @@
 									</div> <!-- /connexion --> 
 							<?php
 									echo "<div id='inscription'>
-													<a href='inscription.php' class='' title=''>S'inscrire</a>
-												</div><!-- /inscription -->";
+									<a href='inscription.php' class='' title=''>S'inscrire</a>
+									</div><!-- /inscription -->";
 								}
 								else{
 									echo "<div id='deconnexion'> <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
@@ -181,7 +176,8 @@
 			</div><!-- /row -->
 		</header><!-- /header -->
 
-		<div class="page-content">			<div class="row clearfix">
+		<div class="page-content">
+			<div class="row clearfix">
 				<div class="grid_9 alpha">
 					<div class="grid_12 alpha posts">
 
@@ -247,7 +243,7 @@
 						<ul class="counter clearfix">
 							<li class="twitter">
 								<a href="index.html#"><i class="fa fa-twitter"></i></a>
-								<span> 2545 <br> Followes </span>
+								<span> 2545 <br> Followers </span>
 							</li>
 							<li class="facebook">
 								<a href="index.html#"><i class="fa fa-facebook"></i></a>
@@ -292,28 +288,6 @@
 
 					<div class="widget">
 						<div class="title"><h4>Commentaires récents</h4></div>
-						<ul class="recent_comments small_posts">
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar1.jpg" alt="#"></a>
-								<h5><a href="index.html#">Alex Cohn</a>:</h5>
-								<p>Lorem Ipsum is simply dummy text of the printing...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar2.jpg" alt="#"></a>
-								<h5><a href="index.html#">Michele</a>:</h5>
-								<p>Here's What Instagram Ads Will Look Like...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar3.jpg" alt="#"></a>
-								<h5><a href="index.html#">Admin</a>:</h5>
-								<p>Lorem ipsum is dolor sit amet text of the ipsum...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar4.jpg" alt="#"></a>
-								<h5><a href="index.html#">Tomas Giggs</a>:</h5>
-								<p>Lorem Ipsum is simply dummy text of the printing...</p>
-							</li>
-						</ul>
 					</div><!-- /widget commentaires récents -->
 
 				</div><!-- /grid3 barre latérale -->
@@ -340,15 +314,6 @@
 		<script type="text/javascript" src="js/custom.js"></script>
 		<script type="text/javascript">
 		/* <![CDATA[ */
-
-			// Disqus
-			var disqus_shortname = 'officialtemplate'; 
-			(function () {
-				var s = document.createElement('script'); s.async = true;
-				s.type = 'text/javascript';
-				s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-				(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-			}());
 			function date_time(id){
 				date = new Date;
 				year = date.getFullYear();

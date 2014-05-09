@@ -26,9 +26,6 @@
 	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<!-- Seo Meta -->
-		<meta name="description" content="Here's What Instagram Ads Will Look Like">
-		<meta name="keywords" content="iPress, magazine, light, dark, themeforest, multi purpose, premium, unlimited, blog, news, AD, optimized">
 
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
@@ -70,8 +67,8 @@
 									</div> <!-- /connexion --> 
 							<?php
 									echo "<div id='inscription'>
-													<a href='inscription.php' class='' title=''>S'inscrire</a>
-												</div><!-- /inscription -->";
+									<a href='inscription.php' class='' title=''>S'inscrire</a>
+									</div><!-- /inscription -->";
 								}
 								else{
 									echo "<div id='deconnexion'>  <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
@@ -132,7 +129,8 @@
 			</div><!-- /row -->
 		</header><!-- /header -->
 
-		<div class="page-content">			<div class="row clearfix">
+		<div class="page-content">
+			<div class="row clearfix">
 				<div class="grid_9 alpha">
 					<div class="grid_12 alpha posts">
 
@@ -183,7 +181,7 @@
 							
 									<tfoot>
 										<tr>
-											<td colspan="3" id="prev"><a href="index.html#" title="View posts for December 2013">« Dec</a></td>
+											<td colspan="3" id="prev"><a href="index.html#" title="">« Dec</a></td>
 											<td class="pad">&nbsp;</td>
 											<td colspan="3" id="next" class="pad">&nbsp;</td>
 										</tr>
@@ -202,28 +200,6 @@
 
 					<div class="widget">
 						<div class="title"><h4>Commentaires récents</h4></div>
-						<ul class="recent_comments small_posts">
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar1.jpg" alt="#"></a>
-								<h5><a href="index.html#">Alex Cohn</a>:</h5>
-								<p>Lorem Ipsum is simply dummy text of the printing...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar2.jpg" alt="#"></a>
-								<h5><a href="index.html#">Michele</a>:</h5>
-								<p>Here's What Instagram Ads Will Look Like...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar3.jpg" alt="#"></a>
-								<h5><a href="index.html#">Admin</a>:</h5>
-								<p>Lorem ipsum is dolor sit amet text of the ipsum...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar4.jpg" alt="#"></a>
-								<h5><a href="index.html#">Tomas Giggs</a>:</h5>
-								<p>Lorem Ipsum is simply dummy text of the printing...</p>
-							</li>
-						</ul>
 					</div><!-- /widget commentaires récents -->
 
 				</div><!-- /grid3 barre latérale -->

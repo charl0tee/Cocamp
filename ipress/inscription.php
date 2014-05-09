@@ -18,10 +18,6 @@
 	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<!-- Seo Meta -->
-		<meta name="description" content="Here's What Instagram Ads Will Look Like">
-		<meta name="keywords" content="iPress, magazine, light, dark, themeforest, multi purpose, premium, unlimited, blog, news, AD, optimized">
-
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="styles/icons.css" media="screen" />
@@ -31,7 +27,6 @@
 
 	<!-- Favicon -->
 		<link rel="shortcut icon" href="images/favicon.ico">
-		<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
 	<!--[if IE]>
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=EmulateIE8; IE=EDGE" />
@@ -78,7 +73,7 @@
 			<div class="b_head">
 				<div class="row clearfix">
 					<div class="logo">
-						<a href="index.php" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
+						<a href="index.php" title=""><img src="images/logo.png" alt=""></a>
 					</div><!-- /logo -->
 					<div id="poster_ann">
 						<?php
@@ -123,7 +118,8 @@
 			</div><!-- /row -->
 		</header><!-- /header -->
 
-		<div class="page-content">			<div class="row clearfix">
+		<div class="page-content">
+			<div class="row clearfix">
 				<div class="grid_9 alpha">
 					<div class="grid_12 alpha posts">
 
@@ -153,7 +149,7 @@
 						<ul class="counter clearfix">
 							<li class="twitter">
 								<a href="index.html#"><i class="fa fa-twitter"></i></a>
-								<span> 2545 <br> Followes </span>
+								<span> 2545 <br> Followers </span>
 							</li>
 							<li class="facebook">
 								<a href="index.html#"><i class="fa fa-facebook"></i></a>
@@ -179,7 +175,7 @@
 							
 									<tfoot>
 										<tr>
-											<td colspan="3" id="prev"><a href="index.html#" title="View posts for December 2013">« Dec</a></td>
+											<td colspan="3" id="prev"><a href="index.html#" title="">« Dec</a></td>
 											<td class="pad">&nbsp;</td>
 											<td colspan="3" id="next" class="pad">&nbsp;</td>
 										</tr>
@@ -198,28 +194,6 @@
 
 					<div class="widget">
 						<div class="title"><h4>Commentaires récents</h4></div>
-						<ul class="recent_comments small_posts">
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar1.jpg" alt="#"></a>
-								<h5><a href="index.html#">Alex Cohn</a>:</h5>
-								<p>Lorem Ipsum is simply dummy text of the printing...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar2.jpg" alt="#"></a>
-								<h5><a href="index.html#">Michele</a>:</h5>
-								<p>Here's What Instagram Ads Will Look Like...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar3.jpg" alt="#"></a>
-								<h5><a href="index.html#">Admin</a>:</h5>
-								<p>Lorem ipsum is dolor sit amet text of the ipsum...</p>
-							</li>
-							<li class="clearfix">
-								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar4.jpg" alt="#"></a>
-								<h5><a href="index.html#">Tomas Giggs</a>:</h5>
-								<p>Lorem Ipsum is simply dummy text of the printing...</p>
-							</li>
-						</ul>
 					</div><!-- /widget commentaires récents -->
 
 				</div><!-- /grid3 barre latérale -->
@@ -245,15 +219,6 @@
 		<script type="text/javascript" src="js/custom.js"></script>
 		<script type="text/javascript">
 		/* <![CDATA[ */
-
-			// Disqus
-			var disqus_shortname = 'officialtemplate'; 
-			(function () {
-				var s = document.createElement('script'); s.async = true;
-				s.type = 'text/javascript';
-				s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-				(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-			}());
 			function date_time(id){
 				date = new Date;
 				year = date.getFullYear();
