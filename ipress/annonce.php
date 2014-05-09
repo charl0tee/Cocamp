@@ -228,6 +228,8 @@
 								<?php // On affiche le nom et prénom du membre et la date de l'annonce sélectionnée
 									echo $membre[2]." ".$membre[1];
 								?></a> le <?php echo datefr($dateAnn[0]) ?>
+								<br />
+								<?php echo "<a href='envoi_message.php?id=".$idMembre."'>Contacter l'annonceur</a>"; ?>
 							</div>
 
 							<?php //On affiche l'image de l'annonce
@@ -259,6 +261,7 @@
 									echo $descr[0];  
 								?>
 							</p>
+							<br />
 						</div><!-- /single post -->
 
 						<div class="disqus_comments">

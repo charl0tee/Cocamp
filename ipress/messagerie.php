@@ -9,11 +9,11 @@
 	$membre=mysql_fetch_row($result_membre);
 
 	// On effectue une requête afin d'afficher les messages envoyés par le membre		
-	$requet = "SELECT * FROM Message WHERE IdSender='".$membre[0]."'";
+	$requet = "SELECT * FROM Message WHERE IdSender='".$membre[0]."' ORDER BY IdMessage DESC";
 	$result = mysql_query($requet) or die ("Erreur de la base de données.");
 
 	// On effectue une requête afin d'afficher les messages recus par le membre		
-	$requet2 = "SELECT * FROM Message WHERE IdReceiver='".$membre[0]."'";
+	$requet2 = "SELECT * FROM Message WHERE IdReceiver='".$membre[0]."' ORDER BY IdMessage DESC";
 	$result2 = mysql_query($requet2) or die ("Erreur de la base de données.");
 
 	
@@ -181,6 +181,26 @@
 		<div class="page-content">
 			<div class="row clearfix">
 				<div class="grid_9 alpha">
+					<div class="grid_12 omega posts righter">
+						<div class="title colordefault">
+							<h4>Messages reçus</h4>
+						</div><!-- /title bar -->
+						
+						<?php while($affiche2 = mysql_fetch_row($result2)) {
+							echo "<div class='messages'>";
+							// Requête pour récupérer le nom et prénom du membre qui a envoié le message
+							$requet_sender="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche2[1]."'";
+							$result_sender=mysql_query($requet_sender) or die("Erreur de base de données.");
+							$sender=mysql_fetch_row($result_sender);
+
+							// on affiche qu'une partie du message
+							$messagecoupe2=substr($affiche2[3], 0, 10);
+
+							// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
+							echo "<a href='message.php?id=".$affiche2[0]."'>Message reçu le ".datefr($affiche2[4])." - Par ".$sender[1]." ".$sender[0]." - ".$messagecoupe2."</a><br />";	
+							echo "</div>";
+						} ?>
+					</div><!-- end grid12 -->
 
 					<div class="grid_12 omega posts righter">
 						<div class="title colordefault">
@@ -204,26 +224,6 @@
 						?>
 					</div><!-- end grid12 -->
 
-					<div class="grid_12 omega posts righter">
-						<div class="title colordefault">
-							<h4>Messages reçus</h4>
-						</div><!-- /title bar -->
-						
-						<?php while($affiche2 = mysql_fetch_row($result2)) {
-							echo "<div class='messages'>";
-							// Requête pour récupérer le nom et prénom du membre qui a envoié le message
-							$requet_sender="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche2[1]."'";
-							$result_sender=mysql_query($requet_sender) or die("Erreur de base de données.");
-							$sender=mysql_fetch_row($result_sender);
-
-							// on affiche qu'une partie du message
-							$messagecoupe2=substr($affiche2[3], 0, 10);
-
-							// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
-							echo "<a href='message.php?id=".$affiche2[0]."'>Message reçu le ".datefr($affiche2[4])." - Par ".$sender[1]." ".$sender[0]." - ".$messagecoupe2."</a><br />";	
-							echo "</div>";
-						} ?>
-					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
 				<div class="grid_3 omega sidebar sidebar_a">
