@@ -1,4 +1,5 @@
 <?php 
+<<<<<<< HEAD
 	session_start();
 	include("../connect_bdd.php");
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
@@ -12,8 +13,31 @@
 	$requetOrientation = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Orientation'";
 	$resultOrientation = mysql_query($requetOrientation) or die ("Erreur de la base de données.");
 	// fonction pour convertir la date en format français
+=======
+	session_start ();
+	include("../connect_bdd.php");
+	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
+
+	// Requête pour récupérer l'id du membre qui a envoyé et recu les messages
+	$requet_membre="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
+	$result_membre=mysql_query($requet_membre) or die("Erreur de base de données.");
+	$membre=mysql_fetch_row($result_membre);
+
+	// On effectue une requête afin d'afficher les messages envoyés par le membre		
+	$requet = "SELECT * FROM Message WHERE IdSender='".$membre[0]."'";
+	$result = mysql_query($requet) or die ("Erreur de la base de données.");
+
+	// On effectue une requête afin d'afficher les messages recus par le membre		
+	$requet2 = "SELECT * FROM Message WHERE IdReceiver='".$membre[0]."'";
+	$result2 = mysql_query($requet2) or die ("Erreur de la base de données.");
+
+	
+	// fonction pour convertir la date en format français et en format texte
+>>>>>>> b1e275081bedc234563fe98ec606b6fc00e3d55e
 	function datefr($date) { 
-		$split = explode("-",$date); 
+		$splitTime = explode(" ",$date); 
+
+		$split = explode("-", $splitTime[0]);
 		$annee = $split[0]; 
 		$mois = $split[1]; 
 		$jour = $split[2];
@@ -54,9 +78,8 @@
 			case 12:
                 $moistxt = ' décembre ';
 		}
-		return "$jour"." "."$moistxt"." "."$annee";
+		return "$jour"." "."$moistxt"." "."$annee"." à "."$splitTime[1]";
 	}
-
 ?>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="fr"><![endif]-->
@@ -176,49 +199,46 @@
 				<div class="grid_9 alpha">
 
 					<div class="grid_12 omega posts righter">
-						<div class="title color1">
+						<div class="title colordefault">
 							<h4>Messages envoyés</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($orientation = mysql_fetch_row($resultOrientation)) { ?>
-							<div class="mbf clearfix article_cat"> <!-- article -->
-								<div class="grid_4 alpha">
-									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$orientation[7].".jpg'/><br />"; ?></a>
-								</div><!-- /grid4 alpha -->
+						<?php while($affiche = mysql_fetch_row($result)) {
+								echo "<div class='messages'>";
+								// Requête pour récupérer le nom et prénom du membre qui a recu le message
+								$requet_receiver="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche[2]."'";
+								$result_receiver=mysql_query($requet_receiver) or die("Erreur de base de données.");
+								$receiver=mysql_fetch_row($result_receiver);
 
-								<div class="grid_8 omega">
-									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$orientation[0]."'>".$orientation[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
-										<p class="date_content"> <?php echo datefr($orientation[6]) ?>  -  <?php echo $orientation[5] ?>
-										<br /><?php echo $orientation[2]."€"?></p>
-										<p class="description_content"> <?php echo $orientation[4] ?> </p>
-									</div><!-- /post content -->
-								</div><!-- /grid8 omega -->
-							</div><!-- /article-->
-						<?php } ?>	
+								// on affiche qu'une partie du message
+								$messagecoupe=substr($affiche[3], 0, 10);
+
+								// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
+								echo "<a href='message.php?id=".$affiche[0]."'>Message envoyé le ".datefr($affiche[4])." - À ".$receiver[1]." ".$receiver[0]." - ".$messagecoupe."</a><br />";
+								echo "</div>";
+							}
+						?>
 					</div><!-- end grid12 -->
 
 					<div class="grid_12 omega posts righter">
-						<div class="title color1">
+						<div class="title colordefault">
 							<h4>Messages reçus</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($orientation = mysql_fetch_row($resultOrientation)) { ?>
-							<div class="mbf clearfix article_cat"> <!-- article -->
-								<div class="grid_4 alpha">
-									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$orientation[7].".jpg'/><br />"; ?></a>
-								</div><!-- /grid4 alpha -->
+						<?php while($affiche2 = mysql_fetch_row($result2)) {
+							echo "<div class='messages'>";
+							// Requête pour récupérer le nom et prénom du membre qui a envoié le message
+							$requet_sender="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche2[1]."'";
+							$result_sender=mysql_query($requet_sender) or die("Erreur de base de données.");
+							$sender=mysql_fetch_row($result_sender);
 
-								<div class="grid_8 omega">
-									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$orientation[0]."'>".$orientation[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
-										<p class="date_content"> <?php echo datefr($orientation[6]) ?>  -  <?php echo $orientation[5] ?>
-										<br /><?php echo $orientation[2]."€"?></p>
-										<p class="description_content"> <?php echo $orientation[4] ?> </p>
-									</div><!-- /post content -->
-								</div><!-- /grid8 omega -->
-							</div><!-- /article-->
-						<?php } ?>	
+							// on affiche qu'une partie du message
+							$messagecoupe2=substr($affiche2[3], 0, 10);
+
+							// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
+							echo "<a href='message.php?id=".$affiche2[0]."'>Message reçu le ".datefr($affiche2[4])." - Par ".$sender[1]." ".$sender[0]." - ".$messagecoupe2."</a><br />";	
+							echo "</div>";
+						} ?>
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 

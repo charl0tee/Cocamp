@@ -5,15 +5,18 @@
 
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
 
-	// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
-	$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
-	$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
-	$profil=mysql_fetch_row($resultProfil);
+	// On récupère l'ID du membre que l'utilisateur veut contacter
+	$idMembre = $_GET['id'];
+
+	// requête pour récupérer le nom et prénom du membre à contacter
+	$requetMembre = "SELECT Membre.NomMembre, Membre.PrenomMembre FROM Membre WHERE Membre.IdMembre='".$idMembre."'";
+	$resultMembre = mysql_query($requetMembre) or die ("Erreur de la base de données.");
+	$membre=mysql_fetch_row($resultMembre);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
 <!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
-<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><!--<![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR"><!--<![endif]-->
 <head>
 	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -66,7 +69,7 @@
 												</div><!-- /inscription -->";
 								}
 								else{
-									echo "<div id='deconnexion'> <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
+									echo "<div id='deconnexion'> <a href='profil.php'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
 								}	
 							?>
 						
@@ -78,7 +81,7 @@
 			<div class="b_head">
 				<div class="row clearfix">
 					<div class="logo">
-						<a href="index.php" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
+						<a href="index.php"><img src="images/logo.png" alt=""></a>
 					</div><!-- /logo -->
 					<div id="poster_ann">
 						<?php
@@ -86,6 +89,7 @@
 								echo "<a href='post_ann.php'><p>Déposer une annonce</p></a>";
 							}
 						?>
+					</div>
 				</div><!-- /row -->
 			</div><!-- /b head -->
 
@@ -110,7 +114,7 @@
 
 					<div class="right_icons">
 						<div class="search">
-							<div class="search_icon"><a href="messagerie.php"><i class="icon-message"></i></a></div>
+							<div class="search_icon"><i class="fa-search"></i></div>
 							<div class="s_form">
 								<form action="search_result.html" id="search" method="get">
 									<input id="inputhead" name="search" type="text" onfocus="if (this.value=='Recherche') this.value = '';" onblur="if (this.value=='') this.value = 'Recherche';" value="Recherche" placeholder="Recherche">
@@ -128,20 +132,15 @@
 					<div class="grid_12 alpha posts">
 
 						<div class="single_post mbf clearfix">
-							<h3 class="single_title">Inscrivez-vous</h3>
-							<form method='post' action='../login_inscript.php' ENCTYPE='multipart/form-data'>
-								<h2>S'inscrire</h2>
-								<p>Nom : <input type='text' name='nom' /></p>
-								<p>Prénom : <input type='text' name='prenom' /></p>
-								<p>Age : <input type='text' name='age' maxlength="2"/></p>
-								<p>Formation : <input type='text' name='formation' /></p>
-								<p>Mail : <input type='text' name='mail' /></p>
-								<p>Mot de passe : <input type='password' name='mdp_inscript' /></p>
-								<p>
-									Image : <input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
-									<input type='file' name='image' />
-								</p>
-								<input type='submit' value='Valider' />
+
+							<h3 class="single_title">Écrire un message</h3>
+							<form method='post' action='../message_bdd.php?id=<?php echo $idMembre; ?>'>
+								<h5 class="h4float">Destinataire : </h5><p class="pfloat"><?php echo $membre[1]." ".$membre[0]; ?></p>
+
+								<h5>Message :</h5>
+								<textarea name='message' rows='10' cols='50'></textarea>
+								<br />
+								<input id='submitmessage' type='submit' value='Envoyer'/>	
 							</form>
 												
 						</div><!-- /single post -->
@@ -245,15 +244,6 @@
 		<script type="text/javascript" src="js/custom.js"></script>
 		<script type="text/javascript">
 		/* <![CDATA[ */
-
-			// Disqus
-			var disqus_shortname = 'officialtemplate'; 
-			(function () {
-				var s = document.createElement('script'); s.async = true;
-				s.type = 'text/javascript';
-				s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-				(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-			}());
 			function date_time(id){
 				date = new Date;
 				year = date.getFullYear();

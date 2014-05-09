@@ -2744,3 +2744,25 @@ p.description{
 	color: #f8d6d6 !important;
 	background-color: #f16969;
 }
+
+/* Messagerie */
+.messages{
+	border-bottom: 1px solid #c5c5c5;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+#envoyermessage, #submitmessage{
+	background-color: #888888;
+	padding: 10px;
+	color: #fff;
+}
+
+#envoyermessage:hover, #submitmessage:hover{
+	color: #353535;
+}
+
+#submitmessage{
+	border: 0;
+	margin-top: 20px;
+}
