@@ -379,7 +379,6 @@ textarea {
 	font-size: 16px;
 	color: #FFF;
 	text-align: center;
-	padding: 16px 20px;
 	border-left: 1px solid #2B2B2B;
 	display: inline-block;
 	-webkit-transition: all 0.2s ease;
@@ -2712,18 +2711,36 @@ p.description{
 }
 
 /* Déposer une annonce */
-#poster_ann{
+/*#poster_ann{
 	float:left;
 	background-color: #E84A4A;
 	border-radius: 5px;
 	position: absolute;
 	right: 70px;
 	top:14px; 
+	padding: 20px !important;
 }
 
-#poster_ann p{
-	font-size: 16px;
+#poster_ann:hover{
+	background-color: #f57171;
+	font: #ffff00;
+	cursor:pointer; 
+}*/
+
+#poster_ann a{
+	float:left;
+	background-color: #E84A4A;
+	border-radius: 5px;
+	position: absolute;
+	right: 70px;
+	top:14px; 
+	padding: 20px !important;
 	color: #FFF;
-	padding: 20px;
 	text-transform: uppercase;
+	font-size: 16px;
+}
+
+#poster_ann a:hover{
+	color: #f8d6d6 !important;
+	background-color: #f16969;
 }

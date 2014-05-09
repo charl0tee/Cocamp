@@ -1,7 +1,13 @@
 <?php 
+	session_start();
 	include("../connect_bdd.php");
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
-							
+	
+	// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
+	$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
+	$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
+	$profil=mysql_fetch_row($resultProfil);
+
 	// On effectue la requête afin d'afficher toutes les annonces de la catégorie événement			
 	$requetEvenements = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Evenement'";
 	$resultEvenements = mysql_query($requetEvenements) or die ("Erreur de la base de données.");
@@ -108,7 +114,7 @@
 												</div><!-- /inscription -->";
 								}
 								else{
-									echo "<div id='deconnexion'> <a href='profil.php'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
+									echo "<div id='deconnexion'> <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
 								}	
 							?>
 						

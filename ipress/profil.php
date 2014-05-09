@@ -8,6 +8,12 @@
 	// On récupère l'ID du membre sur lequel l'utilisateur a cliqué
 	$idSelect = $_GET['id'];
 
+
+	// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
+	$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
+	$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
+	$profil=mysql_fetch_row($resultProfil);
+
 	//Requête pour afficher les données du membre
 	$requet_membre="SELECT NomMembre, PrenomMembre, MailMembre, ScolMembre, AgeMembre, PhotoMembre FROM Membre WHERE IdMembre='".$idSelect."'";
 	$result_membre=mysql_query($requet_membre) or die("Erreur de base de données.");
@@ -117,7 +123,7 @@
 												</div><!-- /inscription -->";
 								}
 								else{
-									echo "<div id='deconnexion'> <a href='profil.php'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
+									echo "<div id='deconnexion'> <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
 								}	
 							?>
 						
