@@ -123,7 +123,11 @@
 						<a href="index.php" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
 					</div><!-- /logo -->
 					<div id="poster_ann">
-						<a href="../post_ann.php"><p>Déposer une annonce</p></a>
+						<?php
+							if (isset($_SESSION['mail'])) {
+								echo "<a href='post_ann.php'><p>Déposer une annonce</p></a>";
+							}
+						?>
 					</div>
 				</div><!-- /row -->
 			</div><!-- /b head -->
