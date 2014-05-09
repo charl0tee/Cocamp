@@ -1,22 +1,23 @@
-<?php 
-	session_start ();
+<?php
+	session_start();
+	//Connexion à la base de données
 	include("../connect_bdd.php");
+
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
-
-	// Requête pour récupérer l'id du membre qui a envoyé et recu les messages
-	$requet_membre="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
-	$result_membre=mysql_query($requet_membre) or die("Erreur de base de données.");
-	$membre=mysql_fetch_row($result_membre);
-
-	// On effectue une requête afin d'afficher les messages envoyés par le membre		
-	$requet = "SELECT * FROM Message WHERE IdSender='".$membre[0]."'";
-	$result = mysql_query($requet) or die ("Erreur de la base de données.");
-
-	// On effectue une requête afin d'afficher les messages recus par le membre		
-	$requet2 = "SELECT * FROM Message WHERE IdReceiver='".$membre[0]."'";
-	$result2 = mysql_query($requet2) or die ("Erreur de la base de données.");
-
 	
+	// On récupère l'ID du message
+	$idMessage = $_GET['id'];
+
+	// On effectue une requête afin d'afficher le message sélectionné		
+	$requet = "SELECT * FROM Message WHERE IdMessage='".$idMessage."'";
+	$result = mysql_query($requet) or die ("Erreur de la base de données.");
+	$affiche = mysql_fetch_row($result);
+
+	// Requête pour récupérer le nom et prénom du membre qui a envoié le message
+	$requet_sender="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche[1]."'";
+	$result_sender=mysql_query($requet_sender) or die("Erreur de base de données.");
+	$sender=mysql_fetch_row($result_sender);
+
 	// fonction pour convertir la date en format français et en format texte
 	function datefr($date) { 
 		$splitTime = explode(" ",$date); 
@@ -66,11 +67,11 @@
 	}
 ?>
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie8" lang="fr"><![endif]-->
-<!--[if IE 9 ]><html class="ie9" lang="fr"><![endif]-->
-<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr_FR"><!--<![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR"><!--<![endif]-->
 <head>
-	<title>Here's What Instagram Ads Will Look Like</title>
+	<title>Annonce</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<!-- Seo Meta -->
@@ -178,52 +179,32 @@
 				</div><!-- /c head -->
 			</div><!-- /row -->
 		</header><!-- /header -->
+
 		<div class="page-content">
 			<div class="row clearfix">
 				<div class="grid_9 alpha">
+					<div class="grid_12 alpha posts">
+						<div class="single_post mbf clearfix">
+							<div class="meta mb"> Envoyé par <a href="profil.php?id=<?php echo $affiche[1]; ?>">
+								<?php // On affiche le nom et prénom du membre qui a envoyé le message et la date du message
+									echo $sender[1]." ".$sender[0];
+								?></a> le <?php echo datefr($affiche[4]); ?>
+							</div>
 
-					<div class="grid_12 omega posts righter">
-						<div class="title colordefault">
-							<h4>Messages envoyés</h4>
-						</div><!-- /title bar -->
-						
-						<?php while($affiche = mysql_fetch_row($result)) {
-								echo "<div class='messages'>";
-								// Requête pour récupérer le nom et prénom du membre qui a recu le message
-								$requet_receiver="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche[2]."'";
-								$result_receiver=mysql_query($requet_receiver) or die("Erreur de base de données.");
-								$receiver=mysql_fetch_row($result_receiver);
-
-								// on affiche qu'une partie du message
-								$messagecoupe=substr($affiche[3], 0, 10);
-
-								// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
-								echo "<a href='message.php?id=".$affiche[0]."'>Message envoyé le ".datefr($affiche[4])." - À ".$receiver[1]." ".$receiver[0]." - ".$messagecoupe."</a><br />";
-								echo "</div>";
-							}
-						?>
-					</div><!-- end grid12 -->
-
-					<div class="grid_12 omega posts righter">
-						<div class="title colordefault">
-							<h4>Messages reçus</h4>
-						</div><!-- /title bar -->
-						
-						<?php while($affiche2 = mysql_fetch_row($result2)) {
-							echo "<div class='messages'>";
-							// Requête pour récupérer le nom et prénom du membre qui a envoié le message
-							$requet_sender="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche2[1]."'";
-							$result_sender=mysql_query($requet_sender) or die("Erreur de base de données.");
-							$sender=mysql_fetch_row($result_sender);
-
-							// on affiche qu'une partie du message
-							$messagecoupe2=substr($affiche2[3], 0, 10);
-
-							// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
-							echo "<a href='message.php?id=".$affiche2[0]."'>Message reçu le ".datefr($affiche2[4])." - Par ".$sender[1]." ".$sender[0]." - ".$messagecoupe2."</a><br />";	
-							echo "</div>";
-						} ?>
-					</div><!-- end grid12 -->
+							<p>
+								<?php // on affiche le message
+									echo $affiche[3];
+								?>
+							</p>
+							
+							<p>
+								<?php
+									// pour répondre on envoie un message avec l'id du membre qui a envoyé le message
+									echo "<a id='envoyermessage' href='envoi_message.php?id=".$affiche[1]."'>Répondre</a>";
+								?>
+							</p>
+						</div><!-- /single post -->
+					</div><!-- end grid8 -->
 				</div><!-- end grid9 -->
 
 				<div class="grid_3 omega sidebar sidebar_a">
@@ -241,38 +222,38 @@
 					</div><!-- widget réseaux sociaux -->
 
 					<div class="widget">
-							<div id="calendar_wrap"><table id="wp-calendar">
-								<caption>Avril 2014</caption>
-									<thead>
-										<tr>
-											<th scope="col" title="Monday">L</th>
-											<th scope="col" title="Tuesday">M</th>
-											<th scope="col" title="Wednesday">M</th>
-											<th scope="col" title="Thursday">J</th>
-											<th scope="col" title="Friday">V</th>
-											<th scope="col" title="Saturday">S</th>
-											<th scope="col" title="Sunday">D</th>
-										</tr>
-									</thead>
-							
-									<tfoot>
-										<tr>
-											<td colspan="3" id="prev"><a href="index.html#" title="View posts for December 2013">« Dec</a></td>
-											<td class="pad">&nbsp;</td>
-											<td colspan="3" id="next" class="pad">&nbsp;</td>
-										</tr>
-									</tfoot>
-							
-									<tbody>
-										<tr><td colspan="2" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-										<tr><td>6</td><td>7</td><td id="today">8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
-										<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
-										<tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
-										<tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td class="pad" colspan="2">&nbsp;</td></tr>
-									</tbody>
-								</table>
-							</div>
-						</div><!-- widget calendrier -->
+						<div id="calendar_wrap"><table id="wp-calendar">
+							<caption>Avril 2014</caption>
+								<thead>
+									<tr>
+										<th scope="col" title="Monday">L</th>
+										<th scope="col" title="Tuesday">M</th>
+										<th scope="col" title="Wednesday">M</th>
+										<th scope="col" title="Thursday">J</th>
+										<th scope="col" title="Friday">V</th>
+										<th scope="col" title="Saturday">S</th>
+										<th scope="col" title="Sunday">D</th>
+									</tr>
+								</thead>
+						
+								<tfoot>
+									<tr>
+										<td colspan="3" id="prev"><a href="index.html#" title="View posts for December 2013">« Dec</a></td>
+										<td class="pad">&nbsp;</td>
+										<td colspan="3" id="next" class="pad">&nbsp;</td>
+									</tr>
+								</tfoot>
+						
+								<tbody>
+									<tr><td colspan="2" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+									<tr><td>6</td><td>7</td><td id="today">8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+									<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+									<tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+									<tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td class="pad" colspan="2">&nbsp;</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div><!-- widget calendrier -->
 
 					<div class="widget">
 						<div class="title"><h4>Commentaires récents</h4></div>
@@ -317,12 +298,12 @@
 	</div><!-- /layout -->
 
 	<!-- Scripts -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/ipress.js"></script>
-		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
-		<script type="text/javascript" src="js/jquery.ticker.js"></script>
-		<script type="text/javascript" src="js/custom.js"></script>
-		<script type="text/javascript">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/ipress.js"></script>
+	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="js/jquery.ticker.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
+	<script type="text/javascript">
 		/* <![CDATA[ */
 			function date_time(id){
 				date = new Date;
@@ -351,6 +332,6 @@
 			}
 			window.onload = date_time('date_time');
 		/* ]]> */
-		</script>
+	</script>
 </body>
 </html>

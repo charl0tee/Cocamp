@@ -1,76 +1,24 @@
-<?php 
-	session_start ();
+<?php
+	session_start();
+	//Connexion à la base de données
 	include("../connect_bdd.php");
+
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
 
-	// Requête pour récupérer l'id du membre qui a envoyé et recu les messages
-	$requet_membre="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
-	$result_membre=mysql_query($requet_membre) or die("Erreur de base de données.");
-	$membre=mysql_fetch_row($result_membre);
+	// On récupère l'ID du membre que l'utilisateur veut contacter
+	$idMembre = $_GET['id'];
 
-	// On effectue une requête afin d'afficher les messages envoyés par le membre		
-	$requet = "SELECT * FROM Message WHERE IdSender='".$membre[0]."'";
-	$result = mysql_query($requet) or die ("Erreur de la base de données.");
-
-	// On effectue une requête afin d'afficher les messages recus par le membre		
-	$requet2 = "SELECT * FROM Message WHERE IdReceiver='".$membre[0]."'";
-	$result2 = mysql_query($requet2) or die ("Erreur de la base de données.");
-
-	
-	// fonction pour convertir la date en format français et en format texte
-	function datefr($date) { 
-		$splitTime = explode(" ",$date); 
-
-		$split = explode("-", $splitTime[0]);
-		$annee = $split[0]; 
-		$mois = $split[1]; 
-		$jour = $split[2];
-		switch ($mois){
-	        case 01:
-                $moistxt = ' janvier ';
-                break;
-			case 02:
-                $moistxt = ' février ';
-                break;
-	        case 03:
-                $moistxt = ' mars ';
-                break;
-	        case 04:
-                $moistxt = ' avril ';
-                break;
-	        case 05:
-                $moistxt = ' mai ';
-                break;
-	        case 06:
-                $moistxt = ' juin ';
-                break;
-	        case 07:
-                $moistxt = ' juillet ';
-                break;
-	        case 08:
-                $moistxt = ' août ';
-                break;
-	        case 09:
-                $moistxt = ' septembre ';
-                break;
-	        case 10:
-                $moistxt = ' octobre ';
-                break;
-			case 11:
-                $moistxt = ' novembre ';
-                break;
-			case 12:
-                $moistxt = ' décembre ';
-		}
-		return "$jour"." "."$moistxt"." "."$annee"." à "."$splitTime[1]";
-	}
+	// requête pour récupérer le nom et prénom du membre à contacter
+	$requetMembre = "SELECT Membre.NomMembre, Membre.PrenomMembre FROM Membre WHERE Membre.IdMembre='".$idMembre."'";
+	$resultMembre = mysql_query($requetMembre) or die ("Erreur de la base de données.");
+	$membre=mysql_fetch_row($resultMembre);
 ?>
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie8" lang="fr"><![endif]-->
-<!--[if IE 9 ]><html class="ie9" lang="fr"><![endif]-->
-<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr_FR"><!--<![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR"><!--<![endif]-->
 <head>
-	<title>Here's What Instagram Ads Will Look Like</title>
+	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<!-- Seo Meta -->
@@ -133,7 +81,7 @@
 			<div class="b_head">
 				<div class="row clearfix">
 					<div class="logo">
-						<a href="index.php" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
+						<a href="index.php"><img src="images/logo.png" alt=""></a>
 					</div><!-- /logo -->
 					<div id="poster_ann">
 						<?php
@@ -178,52 +126,25 @@
 				</div><!-- /c head -->
 			</div><!-- /row -->
 		</header><!-- /header -->
-		<div class="page-content">
-			<div class="row clearfix">
+
+		<div class="page-content">			<div class="row clearfix">
 				<div class="grid_9 alpha">
+					<div class="grid_12 alpha posts">
 
-					<div class="grid_12 omega posts righter">
-						<div class="title colordefault">
-							<h4>Messages envoyés</h4>
-						</div><!-- /title bar -->
-						
-						<?php while($affiche = mysql_fetch_row($result)) {
-								echo "<div class='messages'>";
-								// Requête pour récupérer le nom et prénom du membre qui a recu le message
-								$requet_receiver="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche[2]."'";
-								$result_receiver=mysql_query($requet_receiver) or die("Erreur de base de données.");
-								$receiver=mysql_fetch_row($result_receiver);
+						<div class="single_post mbf clearfix">
 
-								// on affiche qu'une partie du message
-								$messagecoupe=substr($affiche[3], 0, 10);
+							<h3 class="single_title">Écrire un message</h3>
+							<form method='post' action='../message_bdd.php?id=<?php echo $idMembre; ?>'>
+								<h5 class="h4float">Destinataire : </h5><p class="pfloat"><?php echo $membre[1]." ".$membre[0]; ?></p>
 
-								// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
-								echo "<a href='message.php?id=".$affiche[0]."'>Message envoyé le ".datefr($affiche[4])." - À ".$receiver[1]." ".$receiver[0]." - ".$messagecoupe."</a><br />";
-								echo "</div>";
-							}
-						?>
-					</div><!-- end grid12 -->
-
-					<div class="grid_12 omega posts righter">
-						<div class="title colordefault">
-							<h4>Messages reçus</h4>
-						</div><!-- /title bar -->
-						
-						<?php while($affiche2 = mysql_fetch_row($result2)) {
-							echo "<div class='messages'>";
-							// Requête pour récupérer le nom et prénom du membre qui a envoié le message
-							$requet_sender="SELECT NomMembre, PrenomMembre FROM Membre WHERE IdMembre='".$affiche2[1]."'";
-							$result_sender=mysql_query($requet_sender) or die("Erreur de base de données.");
-							$sender=mysql_fetch_row($result_sender);
-
-							// on affiche qu'une partie du message
-							$messagecoupe2=substr($affiche2[3], 0, 10);
-
-							// le lien renvoie vers le message sélectionnée grâce à l'ID récupéré par la méthode GET
-							echo "<a href='message.php?id=".$affiche2[0]."'>Message reçu le ".datefr($affiche2[4])." - Par ".$sender[1]." ".$sender[0]." - ".$messagecoupe2."</a><br />";	
-							echo "</div>";
-						} ?>
-					</div><!-- end grid12 -->
+								<h5>Message :</h5>
+								<textarea name='message' rows='10' cols='50'></textarea>
+								<br />
+								<input id='submitmessage' type='submit' value='Envoyer'/>	
+							</form>
+												
+						</div><!-- /single post -->
+					</div><!-- end grid8 -->
 				</div><!-- end grid9 -->
 
 				<div class="grid_3 omega sidebar sidebar_a">
@@ -313,7 +234,6 @@
 				</div>
 			</div>
 		</footer><!-- /footer -->
-
 	</div><!-- /layout -->
 
 	<!-- Scripts -->

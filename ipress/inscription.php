@@ -10,7 +10,7 @@
 <!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
 <!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><!--<![endif]-->
 <head>
-	<title>Here's What Instagram Ads Will Look Like</title>
+	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<!-- Seo Meta -->
@@ -147,155 +147,77 @@
 					<div class="widget">
 						<ul class="counter clearfix">
 							<li class="twitter">
-								<a href="single_post.html#"><i class="fa fa-twitter"></i></a>
+								<a href="index.html#"><i class="fa fa-twitter"></i></a>
 								<span> 2545 <br> Followes </span>
 							</li>
 							<li class="facebook">
-								<a href="single_post.html#"><i class="fa fa-facebook"></i></a>
+								<a href="index.html#"><i class="fa fa-facebook"></i></a>
 								<span> 1317 <br> Likes </span>
 							</li>
-							<li class="dribbble">
-								<a href="single_post.html#"><i class="fa fa-dribbble"></i></a>
-								<span> 325 <br> Followes </span>
-							</li>
-							<li class="rss">
-								<a href="single_post.html#"><i class="fa fa-rss"></i></a>
-								<span> 27 <br> Subscribers </span>
-							</li>
 						</ul>
-					</div><!-- widget -->
+					</div><!-- widget réseaux sociaux -->
 
 					<div class="widget">
-						<div class="ads_widget clearfix">
-							<a href="single_post.html#"><img src="images/ads2.jpg" alt="#"></a>
-							<a href="single_post.html#" class="lefter mt"><img src="images/ads3.jpg" alt="#"></a>
-							<a href="single_post.html#" class="righter mt"><img src="images/ads3.jpg" alt="#"></a>
-						</div><!-- widget -->
-					</div><!-- widget -->
-
-					<div class="widget">
-						<div class="title"><h4>What's Hot</h4></div>
-
-							<div class="small_slider_hots owl-carousel owl-theme">
-								<div class="item clearfix">
-									<ul class="small_posts">
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb13.jpg" alt="#"><span>1</span></a>
-											<h3><a href="single_post.html">What is the worst could be the worst?</a></h3>
-											<div class="meta mb"> <a class="cat color1" href="single_post.html#" title="View all posts under Entertainment">Entertainment</a><span class="post_rating" href="#" title="Rating">8.89</span> </div>
-										</li>
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb12.jpg" alt="#"><span>2</span></a>
-											<h3><a href="single_post.html">Praesent ipsum adipiscing mi eget ipsum</a></h3>
-											<div class="meta mb"> <a class="cat color3" href="single_post.html#" title="View all posts under News">News</a><span class="post_rating" href="#" title="Rating">8.1</span> </div>
-										</li>
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb11.jpg" alt="#"><span>3</span></a>
-											<h3><a href="single_post.html">Paul Thomson on post with SoundCloud</a></h3>
-											<div class="meta mb"> <a class="cat color4" href="single_post.html#" title="View all posts under Sports">Sports</a><span class="post_rating" href="#" title="Rating">7.95</span> </div>
-										</li>
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb10.jpg" alt="#"><span>4</span></a>
-											<h3><a href="single_post.html">For the days of peace and warmth</a></h3>
-											<div class="meta mb"> <a class="cat color5" href="single_post.html#" title="View all posts under People">People</a><span class="post_rating" href="#" title="Rating">7.5</span> </div>
-										</li>
-									</ul>
-								</div>
-								<div class="item clearfix">
-									<ul class="small_posts">
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb9.jpg" alt="#"><span>5</span></a>
-											<h3><a href="single_post.html">What worst could be the worst?</a></h3>
-											<div class="meta mb"> <a class="cat color6" href="single_post.html#" title="View all posts under People">People</a><span class="post_rating" href="#" title="Rating">7</span> </div>
-										</li>
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb8.jpg" alt="#"><span>6</span></a>
-											<h3><a href="single_post.html">Praesent ipsum adipiscing mi eget ipsum</a></h3>
-											<div class="meta mb"> <a class="cat color7" href="single_post.html#" title="View all posts under TV">TV</a><span class="post_rating" href="#" title="Rating">5.89</span> </div>
-										</li>
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb7.jpg" alt="#"><span>7</span></a>
-											<h3><a href="single_post.html">Paul Thomson on post with SoundCloud</a></h3>
-											<div class="meta mb"> <a class="cat color8" href="single_post.html#" title="View all posts under Society">Society</a><span class="post_rating" href="#" title="Rating">5.5</span> </div>
-										</li>
-										<li class="clearfix">
-											<a class="s_thumb hover-shadow" href="single_post.html"><img width="70" height="70" src="images/assets/thumb6.jpg" alt="#"><span>8</span></a>
-											<h3><a href="single_post.html">For the days of peace and warmth</a></h3>
-											<div class="meta mb"> <a class="cat color3" href="single_post.html#" title="View all posts under Health">Health</a><span class="post_rating" href="#" title="Rating">4</span> </div>
-										</li>
-									</ul>
-								</div>
-							</div><!-- /slides -->
-					</div><!-- /widget -->
-
-					<div class="widget">
-						<div class="latest_tweets">
-							<h4> <i class="fa fa-twitter"></i>  @iPress <small> tweets </small> </h4>
-							<div class="tweets">
-								<div class="tweets_slider owl-carousel owl-theme">
-									<div class="item clearfix">
-										Singolo is a free PSD template of a flat, single page website created by @T20 #freebie #psd <a href="single_post.html#">http://bit.ly/19XM8Lj</a> <br><br>										2 hours ago  
-									</div><!-- /slide -->
-									<div class="item clearfix">
-										Singolo is a free PSD template of a flat, single page website created by @T20 #freebie #psd <a href="single_post.html#">http://bit.ly/19XM8Lj</a> <br><br>
-										1 day ago  
-									</div><!-- /slide -->
-									<div class="item clearfix">
-										Singolo is a free PSD template of a flat, single page website created by @T20 #freebie #psd <a href="single_post.html#">http://bit.ly/19XM8Lj</a> <br><br>
-										5 days ago  
-									</div><!-- /slide -->
-								</div><!-- /tweets slider -->
-							</div><!-- /tweets -->
-						</div><!-- /latest tweets -->
-					</div><!-- /widget -->
-
-					<div class="widget">
-						<div class="title"><h4>Polls</h4></div>
-						<div class="wp-polls">
-							<form class="wp-polls-form" action="#" method="post">
-								<p class="tac"><strong>What do you think about our website?</strong></p>
-								<div class="wp-polls-ans">
-									<ul class="wp-polls-ul">
-										<li><input type="radio" name="poll_2" value="6"> <label for="poll-answer-6">Awesome</label></li>
-										<li><input type="radio" name="poll_2" value="7"> <label for="poll-answer-7">Super</label></li>
-										<li><input type="radio" name="poll_2" value="8"> <label for="poll-answer-8">Normal</label></li>
-										<li><input type="radio" name="poll_2" value="9"> <label for="poll-answer-9">Bad</label></li>
-									</ul>
+							<div id="calendar_wrap"><table id="wp-calendar">
+								<caption>Avril 2014</caption>
+									<thead>
+										<tr>
+											<th scope="col" title="Monday">L</th>
+											<th scope="col" title="Tuesday">M</th>
+											<th scope="col" title="Wednesday">M</th>
+											<th scope="col" title="Thursday">J</th>
+											<th scope="col" title="Friday">V</th>
+											<th scope="col" title="Saturday">S</th>
+											<th scope="col" title="Sunday">D</th>
+										</tr>
+									</thead>
 							
-									<input type="button" name="vote" value="   Vote   " class="Buttons">
-									<input type="button" name="results" value="   View Results   " class="Buttons">
-								</div>
-							</form>
-						</div>
-					</div><!-- widget -->
+									<tfoot>
+										<tr>
+											<td colspan="3" id="prev"><a href="index.html#" title="View posts for December 2013">« Dec</a></td>
+											<td class="pad">&nbsp;</td>
+											<td colspan="3" id="next" class="pad">&nbsp;</td>
+										</tr>
+									</tfoot>
+							
+									<tbody>
+										<tr><td colspan="2" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+										<tr><td>6</td><td>7</td><td id="today">8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+										<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
+										<tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
+										<tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td class="pad" colspan="2">&nbsp;</td></tr>
+									</tbody>
+								</table>
+							</div>
+						</div><!-- widget calendrier -->
 
 					<div class="widget">
-						<div class="title"><h4>Recent Comments</h4></div>
+						<div class="title"><h4>Commentaires récents</h4></div>
 						<ul class="recent_comments small_posts">
 							<li class="clearfix">
-								<a class="s_thumb hover-shadow" href="single_post.html"><img width="80" height="80" src="images/assets/avatar1.jpg" alt="#"></a>
-								<h5><a href="single_post.html#">Alex Cohn</a>:</h5>
+								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar1.jpg" alt="#"></a>
+								<h5><a href="index.html#">Alex Cohn</a>:</h5>
 								<p>Lorem Ipsum is simply dummy text of the printing...</p>
 							</li>
 							<li class="clearfix">
-								<a class="s_thumb hover-shadow" href="single_post.html"><img width="80" height="80" src="images/assets/avatar2.jpg" alt="#"></a>
-								<h5><a href="single_post.html#">Michele</a>:</h5>
+								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar2.jpg" alt="#"></a>
+								<h5><a href="index.html#">Michele</a>:</h5>
 								<p>Here's What Instagram Ads Will Look Like...</p>
 							</li>
 							<li class="clearfix">
-								<a class="s_thumb hover-shadow" href="single_post.html"><img width="80" height="80" src="images/assets/avatar3.jpg" alt="#"></a>
-								<h5><a href="single_post.html#">Admin</a>:</h5>
+								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar3.jpg" alt="#"></a>
+								<h5><a href="index.html#">Admin</a>:</h5>
 								<p>Lorem ipsum is dolor sit amet text of the ipsum...</p>
 							</li>
 							<li class="clearfix">
-								<a class="s_thumb hover-shadow" href="single_post.html"><img width="80" height="80" src="images/assets/avatar4.jpg" alt="#"></a>
-								<h5><a href="single_post.html#">Tomas Giggs</a>:</h5>
+								<a class="s_thumb" href="single_post.html"><img width="80" height="80" src="images/assets/avatar4.jpg" alt="#"></a>
+								<h5><a href="index.html#">Tomas Giggs</a>:</h5>
 								<p>Lorem Ipsum is simply dummy text of the printing...</p>
 							</li>
 						</ul>
-					</div><!-- /widget -->
+					</div><!-- /widget commentaires récents -->
 
-				</div><!-- /grid3 sidebar A -->
+				</div><!-- /grid3 barre latérale -->
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

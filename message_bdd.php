@@ -30,12 +30,15 @@
 				$requetMessage="INSERT INTO Message (IdSender, IdReceiver, ContenuMess, DateMess) values ('$emetteur', '$destinataire', '".mysql_real_escape_string($contenuMess)."', '$dateMess')";	
 				mysql_query($requetMessage) or die("erreur requête".mysql_error());
 
-				echo "Votre message a bien été envoyé !";
+				echo "<script>alert('Votre message a bien été envoyé !')</script>";
+				// on redirige notre visiteur vers la page de l'annonce
+				echo "<script>window.location.replace('ipress/messagerie.php');</script>";
 
 			}
 			else{
-				echo "Veuillez écrire un message</br>
-				<a href='envoi_message.php'>Retour</a>";
+				echo "<script>alert('Veuillez écrire un message')</script>";
+				// on redirige notre visiteur vers la page de l'annonce
+				echo "<script>window.location.replace('ipress/envoi_message.php?id=".$destinataire."');</script>";
 			}
 		?>
 	</body>
