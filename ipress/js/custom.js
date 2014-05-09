@@ -165,7 +165,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	// Search
-	$(".search_icon").click(function() {
+	/*$(".search_icon").click(function() {
 		if ($(this).hasClass('opened')) {
 			$(this).removeClass('opened');
 			$('.search_icon i').removeClass('activeated_search');
@@ -184,7 +184,7 @@ jQuery(document).ready(function ($) {
 	});
 	$('.search').click(function(e) {
 		e.stopPropagation();
-	});
+	});*/
 
 	// Connexion
 	$(".connect").click(function() {

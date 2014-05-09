@@ -34,11 +34,17 @@
 					echo "<script>window.location.replace('ipress/index.php');</script>";
 					//header('Location: index.php');
 				}
-				else { echo "Mauvais mail ou mauvais mot de passe. Veuillez réessayer.<br/>";
-					echo "<a href='ipress/index.php'>Retour</a>";}
+				else { 
+					echo "<script>alert('Mauvais mail ou mauvais mot de passe. Veuillez réessayer.');</script>";
+					// on redirige notre visiteur vers la page pour s'inscrire
+					echo "<script>window.location.replace('ipress/index.php');</script>";
+				}
 			}		
-			else { echo "Veuillez remplir tous les champs.<br/>";
-				echo "<a href='ipress/index.php'>Retour</a>";}	
+			else { 
+				echo "<script>alert('Veuillez remplir tous les champs.');</script>";
+				// on redirige notre visiteur vers la page pour s'inscrire
+				echo "<script>window.location.replace('ipress/index.php');</script>";
+			}	
 		?>
 	</body>
 </html>

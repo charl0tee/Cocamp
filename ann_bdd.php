@@ -64,17 +64,21 @@
 							mysql_query($requeteimage) or die("erreur requête".mysql_error());
 						}
 						else{
-							die("Problème avec le format de l'image");
+							echo "<script>alert('Problème avec le format de l'image.');</script>";
+							// on redirige notre visiteur vers la page pour poster l'annonce
+							echo "<script>window.location.replace('ipress/post_ann.php');</script>";
 						}
 					}	
 					else {
-						echo "Vous n'avez pas ajouté d'images <br />
-						<a href='post_ann.php'>Retour</a>";
+						echo "<script>alert('Vous n'avez pas ajouté d'images.');</script>";
+						// on redirige notre visiteur vers la page de l'annonce
+						echo "<script>window.location.replace('ipress/post_ann.php')</script>";
 					}
 				}
 				else {
-					echo "Veuillez remplir tous les champs.";
-					echo "<br /><a href='post_ann.php'>Retour</a><br />";
+					echo "<script>alert('Veuillez remplir tous les champs.');</script>";
+					// on redirige notre visiteur vers la page de l'annonce
+					echo "<script>window.location.replace('ipress/post_ann.php')</script>";
 				}
 			?>
 		</div>	

@@ -20,18 +20,18 @@
 			$idSelect = $_GET['id'];
 		
 			// On effectue une requête afin de récupérer les donnnées de l'annonce que le membre veut supprimer			
-			$requet = "SELECT Membre.MailMembre FROM Annonce, Membre WHERE Annonce.IdMembre=Membre.IdMembre AND Annonce.IdAnn='".$idSelect."'";
+			$requet = "SELECT Membre.IdMembre, Membre.MailMembre FROM Annonce, Membre WHERE Annonce.IdMembre=Membre.IdMembre AND Annonce.IdAnn='".$idSelect."'";
 			$result = mysql_query($requet) or die ("Erreur de la base de données.");
 			$affiche = mysql_fetch_row($result);
 			
 			// On vérifie que l'annonce à modifier est bien celle du membre connecté
-			if($affiche[0]==$_SESSION['mail']){
+			if($affiche[1]==$_SESSION['mail']){
 				$requetSuppr = "DELETE FROM Annonce WHERE IdAnn='".$idSelect."'";
 				$resultSuppr = mysql_query($requetSuppr) or die ("Erreur de la base de données.");
 				
 				echo "<script>alert('Votre annonce a bien été supprimée.')</script>";
 				// on redirige notre visiteur vers la page d'accueil
-				echo "<script>window.location.replace('ipress/profil.php');</script>";
+				echo "<script>window.location.replace('ipress/profil.php?id=".$affiche[0].");</script>";
 			}
 			else{
 				echo "Cette annonce ne vous appartient pas.";

@@ -61,19 +61,28 @@
 							
 						}
 						else{
-							die("Problème avec le format de l'image");
+							echo "<script>alert('Problème avec le format de l'image.');</script>";
+							// on redirige notre visiteur vers la page pour s'inscrire
+							echo "<script>window.location.replace('ipress/inscription.php');</script>";
 						}
 					}	
 					else {
-						echo "Vous n'avez pas ajouté d'images <br />
-						<a href='inscription.php'>Retour</a>";
+						echo "<script>alert('Vous n'avez pas ajouté d'image.');</script>";
+						// on redirige notre visiteur vers la page pour s'inscrire
+						echo "<script>window.location.replace('ipress/inscription.php');</script>";
 					}
 				}
-				else { echo "Ce mail est déjà utilisé<br/>";
-					echo "<a href='inscription.php'>Retour</a>";}
+				else { 
+					echo "<script>alert('Ce mail est déjà utilisé.');</script>";
+					// on redirige notre visiteur vers la page pour s'inscrire
+					echo "<script>window.location.replace('ipress/inscription.php');</script>";
+				}
 			}
-			else { echo "Veuillez remplir tous les champs.<br/>";
-				echo "<a href='inscription.php'>Retour</a>";}	
+			else { 
+				echo "<script>alert('Veuillez remplir tous les champs.');</script>";
+				// on redirige notre visiteur vers la page pour s'inscrire
+				echo "<script>window.location.replace('ipress/inscription.php');</script>";
+			}	
 		?>
 	</body>
 </html>

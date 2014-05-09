@@ -162,7 +162,7 @@
 
 					<div class="right_icons">
 						<div class="search">
-							<div class="search_icon"><i class="fa-search"></i></div>
+							<div class="search_icon"><a href="messagerie.php"><i class="icon-message"></i></a></div>
 							<div class="s_form">
 								<form action="search_result.html" id="search" method="get">
 									<input id="inputhead" name="search" type="text" onfocus="if (this.value=='Recherche') this.value = '';" onblur="if (this.value=='') this.value = 'Recherche';" value="Recherche" placeholder="Recherche">

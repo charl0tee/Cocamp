@@ -173,7 +173,7 @@
 
 					<div class="right_icons">
 						<div class="search">
-							<div class="search_icon"><i class="fa-search"></i></div>
+							<div class="search_icon"><a href="messagerie.php"><i class="icon-message"></i></a></div>
 							<div class="s_form">
 								<form action="search_result.html" id="search" method="get">
 									<input id="inputhead" name="search" type="text" onfocus="if (this.value=='Recherche') this.value = '';" onblur="if (this.value=='') this.value = 'Recherche';" value="Recherche" placeholder="Recherche">
@@ -259,19 +259,21 @@
 												$requetannonce="UPDATE Annonce SET TitreAnn='".mysql_real_escape_string($TitreAnn)."', PrixAnn='".$PrixAnn."', DescrAnn='".mysql_real_escape_string($DescrAnn)."', CatAnn='".$Categorie."', IdLocal='".$idLocal[0]."' WHERE IdAnn='".$idSelect."'";	
 												mysql_query($requetannonce) or die("erreur requête".mysql_error());
 												
-												echo "<script>alert('Votre annonce a été modifiée avec succès.')</script>";
+												echo "<script>alert('Votre annonce a été modifiée avec succès.');</script>";
 												// on redirige notre visiteur vers la page de l'annonce
 												echo "<script>window.location.replace('annonce.php?id=".$idSelect."');</script>";
 											}
 											else {
-												echo "Veuillez remplir tous les champs.";
-												echo "<br /><a href='modif_ann.php'>Retour</a><br />";
+												echo "<script>alert('Veuillez remplir tous les champs.');</script>";
+												// on redirige notre visiteur vers la page de l'annonce
+												echo "<script>window.location.replace('annonce.php?id=".$idSelect."')</script>";
 											}
 										}
 									}
 									else{
-										echo "Vous n'êtes pas propriétaire de cette annonce.";
-										echo "<br /><a href='index.php'>Retour à la page d'accueil</a>";
+										echo "<script>alert('Vous n'êtes pas propriétaire de cette annonce.');</script>";
+										// on redirige notre visiteur vers la page de l'annonce
+										echo "<script>window.location.replace('index.php')</script>";
 									}
 								}
 							?>	
