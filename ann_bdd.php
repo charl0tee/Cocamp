@@ -51,9 +51,8 @@
 						
 							echo "Votre annonce a été ajoutée avec succès <br />";
 							// on redirige notre visiteur vers la page de l'annonce
-							echo "<script>window.location.replace('ipress/profil.php');</script>";
+							echo "<script>window.location.replace('ipress/profil.php?id=".$IdMembre[0]."');</script>";
 
-						
 							// On déplace l'image dans le dossier imgAnnonce
 							$newname = $idAnnonce;
 							$uploads_dir = 'imgAnnonce';

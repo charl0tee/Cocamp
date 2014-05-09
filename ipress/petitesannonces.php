@@ -173,7 +173,7 @@
 						<?php while($petitesAnnonces = mysql_fetch_row($resultPetitesAnnonces)) { ?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
-									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$petitesAnnonces[7].".jpg'/><br />"; ?></a>
+									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$petitesAnnonces[7].".jpg'/>"; ?></a>
 								</div><!-- /grid4 alpha -->
 
 								<div class="grid_8 omega">
