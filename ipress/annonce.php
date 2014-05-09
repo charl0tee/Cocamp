@@ -98,14 +98,14 @@
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
 <!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
-<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><!--<![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR"><!--<![endif]-->
 <head>
-	<title>Annonce</title>
+	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<!-- Seo Meta -->
-		<meta name="description" content="Here's What Instagram Ads Will Look Like">
-		<meta name="keywords" content="iPress, magazine, light, dark, themeforest, multi purpose, premium, unlimited, blog, news, AD, optimized">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
 
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
