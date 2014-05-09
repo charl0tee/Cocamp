@@ -3,7 +3,7 @@
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
 							
 	// On effectue la requête afin d'afficher toutes les annonces de la catégorie événement			
-	$requetOrientation = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Covoiturage'";
+	$requetOrientation = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Orientation'";
 	$resultOrientation = mysql_query($requetOrientation) or die ("Erreur de la base de données.");
 	// fonction pour convertir la date en format français
 	function datefr($date) { 
@@ -134,13 +134,13 @@
 						<ul class="sf-menu">
 							<li class="current colordefault home_class"><a href="index.php"><i class="icon-home"></i></a>
 							</li>
-							<li class="color1"><a href="evenements.php">Événements</a>
+							<li class="color1"><a href="evenement.php">Événements</a>
 							</li>
 							<li class="color2"><a href="petitesannonces.php">Petites annonces</a>
 							</li>
-							<li class="color3"><a href="logements.php">Logements</a>
+							<li class="color3"><a href="logement.php">Logements</a>
 							</li>
-							<li class="color4"><a href="stageemploi.php">Stage / Emploi</a></li>
+							<li class="color4"><a href="stageemploi.php">Stages / Emplois</a></li>
 							<li class="color5"><a href="covoiturage.php">Covoiturage</a></li>
 							<li class="color6"><a href="orientation.php">Orientation</a></li>
 							<li class="color7"><a href="loisirs.php">Loisirs</a></li>

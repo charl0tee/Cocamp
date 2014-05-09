@@ -134,13 +134,13 @@
 						<ul class="sf-menu">
 							<li class="current colordefault home_class"><a href="index.php"><i class="icon-home"></i></a>
 							</li>
-							<li class="color1"><a href="evenements.php">Événements</a>
+							<li class="color1"><a href="evenement.php">Événements</a>
 							</li>
 							<li class="color2"><a href="petitesannonces.php">Petites annonces</a>
 							</li>
-							<li class="color3"><a href="logements.php">Logements</a>
+							<li class="color3"><a href="logement.php">Logements</a>
 							</li>
-							<li class="color4"><a href="stageemploi.php">Stage / Emploi</a></li>
+							<li class="color4"><a href="stageemploi.php">Stages / Emplois</a></li>
 							<li class="color5"><a href="covoiturage.php">Covoiturage</a></li>
 							<li class="color6"><a href="orientation.php">Orientation</a></li>
 							<li class="color7"><a href="loisirs.php">Loisirs</a></li>
