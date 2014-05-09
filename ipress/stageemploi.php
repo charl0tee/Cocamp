@@ -9,7 +9,7 @@
 	$profil=mysql_fetch_row($resultProfil);
 
 	// On effectue la requête afin d'afficher toutes les annonces de la catégorie événement			
-	$requetStageEmploi = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='StageEmploi'";
+	$requetStageEmploi = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='StageEmploi' ORDER BY Annonce.IdAnn DESC";
 	$resultStageEmploi = mysql_query($requetStageEmploi) or die ("Erreur de la base de données.");
 	// fonction pour convertir la date en format français
 	function datefr($date) { 

@@ -8,6 +8,11 @@
 	// On récupère l'ID du message
 	$idMessage = $_GET['id'];
 
+	// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
+	$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
+	$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
+	$profil=mysql_fetch_row($resultProfil);
+
 	// On effectue une requête afin d'afficher le message sélectionné		
 	$requet = "SELECT * FROM Message WHERE IdMessage='".$idMessage."'";
 	$result = mysql_query($requet) or die ("Erreur de la base de données.");
@@ -122,7 +127,7 @@
 												</div><!-- /inscription -->";
 								}
 								else{
-									echo "<div id='deconnexion'> <a href='profil.php'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
+									echo "<div id='deconnexion'>  <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
 								}	
 							?>
 						

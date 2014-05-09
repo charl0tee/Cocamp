@@ -19,7 +19,7 @@
 	$result_membre=mysql_query($requet_membre) or die("Erreur de base de données.");
 	$membre=mysql_fetch_row($result_membre);	
 	// On effectue les requêtes afin d'afficher les annonces postées par le membre			
-	$requet = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image, Membre WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND Membre.IdMembre=Annonce.IdMembre AND Membre.IdMembre='".$idSelect."'";
+	$requet = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image, Membre WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND Membre.IdMembre=Annonce.IdMembre AND Membre.IdMembre='".$idSelect."'ORDER BY Annonce.IdAnn DESC";
 	$result = mysql_query($requet) or die ("Erreur de la base de données.");
 	// fonction pour convertir la date en format français et en format texte
 	function datefr($date) { 
@@ -186,40 +186,55 @@
 					<div class="grid_12 alpha posts">
 
 						<div class="single_post mbf clearfix">
-							<h3 class="single_title">
-								<?php if ($_SESSION['mail'] == $membre[3]) { ?>
-									<a href="../supprim_profil.php"><i class="icon-trash mi"></i></a>
-								<?php } ?> 
-							</h3>
-							<?php //On affiche l'image du profil
-								echo "<img src='../imgProfil/".$membre[5].".jpg'/><br />";
-							?>	
-							<h4 class="h4float">Prénom : </h4><p class="pfloat">
-							<?php // On affiche le prénom
-								echo $membre[1];
-							?></p>
-							<h4 class="h4float">Nom : </h4><p class="pfloat">
-							<?php // On affiche le nom
-								echo $membre[0];
-							?></p>
-							<h4 class="h4float">Mail :</h4><p class="pfloat">
-							<?php  //On affiche le mail
-								echo $membre[2];
-							?></p>	
-							<h4 class="h4float">Scolarité : </h4><p class="pfloat"><?php  
-								// On affiche la scolarité
-								echo $membre[3];
-							?>
-							<h4 class="h4float">Age : </h4><p class="pfloat"><?php  	
-								// On affiche l'age
-								echo $membre[4];
-							?></p>
+							<div class="mbf clearfix article_cat">
+								<div class="grid_4 alpha">
+									<?php //On affiche l'image du profil
+										echo "<img src='../imgProfil/".$membre[5].".jpg'/><br />";
+									?>	
+								</div>
+								<div class="grid_8 omega">
+									<h3 class="single_title">
+										<?php if ($_SESSION['mail'] == $membre[3]) { ?>
+											<a href="../supprim_profil.php"><i class="icon-trash mi"></i></a>
+										<?php } ?> 
+									</h3>	
+									<h4 class="h4float">Prénom : </h4><p class="pfloat profil">
+									<?php // On affiche le prénom
+										echo $membre[1];
+									?></p>
+									<h4 class="h4float">Nom : </h4><p class="pfloat profil">
+									<?php // On affiche le nom
+										echo $membre[0];
+									?></p>
+									<h4 class="h4float">Mail :</h4><p class="pfloat profil">
+									<?php  //On affiche le mail
+										echo $membre[2];
+									?></p>	
+									<h4 class="h4float">Scolarité : </h4><p class="pfloat profil"><?php  
+										// On affiche la scolarité
+										echo $membre[3];
+									?></p>
+									<h4 class="h4float">Age : </h4><p class="pfloat profil"><?php  	
+										// On affiche l'age
+										echo $membre[4];
+									?></p>
+								</div>	
+							</div>	
 							<h4>Mes annonces :</h4> 
 							<p class="pfloat annonce"><?php // On affiche la liste des annonces
 									while($affiche = mysql_fetch_row($result)) {
 										// le lien renvoie vers l'annonce sélectionnée grâce à l'ID récupéré par la méthode GET
-										echo "<a href='annonce.php?id=".$affiche[0]."'>".$affiche[1]." - ".$affiche[3]."</a><br />".datefr($affiche[6])." - ".$affiche[5]."<br />".$affiche[2]." €<br />".$affiche[4]."<br />";
-										echo "<img src='../imgAnnonce/".$affiche[7].".jpg'/><br />";		
+										?> 
+										<div class="mbf clearfix article_cat"> <!-- article -->
+											<div class="grid_4 alpha"><?php	
+												echo "<img src='../imgAnnonce/".$affiche[7].".jpg'/><br />";?>
+											</div>
+											<div class="grid_8 omega"> <?php
+												echo "<a href='annonce.php?id=".$affiche[0]."'>".$affiche[1]." - ".$affiche[3]."</a><br />".datefr($affiche[6])." - ".$affiche[5]."<br />".$affiche[2]." €<br />".$affiche[4]."<br />";?>
+											</div>
+										</div>	
+											<?php
+
 									} 
 								?>
 							</p>
