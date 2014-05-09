@@ -81,6 +81,7 @@
 								echo "<a href='post_ann.php'><p>Déposer une annonce</p></a>";
 							}
 						?>
+					</div>
 				</div><!-- /row -->
 			</div><!-- /b head -->
 
