@@ -3,8 +3,8 @@
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
 							
 	// On effectue la requête afin d'afficher toutes les annonces de la catégorie événement			
-	$requetEvenements = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Evenement'";
-	$resultEvenements = mysql_query($requetEvenements) or die ("Erreur de la base de données.");
+	$requetLogement = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Logement'";
+	$resultLogement = mysql_query($requetLogement) or die ("Erreur de la base de données.");
 	// fonction pour convertir la date en format français
 	function datefr($date) { 
 		$split = explode("-",$date); 
@@ -167,21 +167,21 @@
 
 					<div class="grid_12 omega posts righter">
 						<div class="title color1">
-							<h4>Événements</h4>
+							<h4>Logements</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($evenements = mysql_fetch_row($resultEvenements)) { ?>
+						<?php while($logement = mysql_fetch_row($resultLogement)) { ?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
-									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$evenements[7].".jpg'/><br />"; ?></a>
+									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$logement[7].".jpg'/><br />"; ?></a>
 								</div><!-- /grid4 alpha -->
 
 								<div class="grid_8 omega">
 									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$evenements[0]."'>".$evenements[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
-										<p class="date_content"> <?php echo datefr($evenements[6]) ?>  -  <?php echo $evenements[5] ?>
-										<br /><?php echo $evenements[2]."€"?></p>
-										<p class="description_content"> <?php echo $evenements[4] ?> </p>
+										<h3><?php echo "<a href='annonce.php?id=".$logement[0]."'>".$logement[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
+										<p class="date_content"> <?php echo datefr($logement[6]) ?>  -  <?php echo $logement[5] ?>
+										<br /><?php echo $logement[2]."€"?></p>
+										<p class="description_content"> <?php echo $logement[4] ?> </p>
 									</div><!-- /post content -->
 								</div><!-- /grid8 omega -->
 							</div><!-- /article-->
