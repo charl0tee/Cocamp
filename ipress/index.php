@@ -1,3 +1,92 @@
+<?php
+	session_start();
+
+	//Connexion à la base de données
+	include("../connect_bdd.php");
+
+	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
+	
+	// On effectue la requête afin d'afficher la dernière annonce de la catégorie événement			
+	$requeteEvenement = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Evenement' ORDER BY Annonce.IdAnn DESC";
+	$resultEvenement = mysql_query($requeteEvenement) or die ("Erreur de la base de données.");
+	$evenement = mysql_fetch_row($resultEvenement);
+	
+	// On effectue la requête afin d'afficher la dernière annonce de la catégorie petite annonce			
+	$requetPetiteannonce = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='PetiteAnnonce' ORDER BY Annonce.IdAnn DESC";
+	$resultPetiteannonce = mysql_query($requetPetiteannonce) or die ("Erreur de la base de données.");
+	$petiteannonce = mysql_fetch_row($resultPetiteannonce);
+
+	// On effectue la requête afin d'afficher la dernière annonce de la catégorie logement			
+	$requetLogement = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Logement' ORDER BY Annonce.IdAnn DESC";
+	$resultLogement = mysql_query($requetLogement) or die ("Erreur de la base de données.");
+	$logement = mysql_fetch_row($resultLogement);
+
+	// On effectue la requête afin d'afficher la dernière annonce de la catégorie stage/emploi			
+	$requetStageEmploi = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='StageEmploi' ORDER BY Annonce.IdAnn DESC";
+	$resultStageEmploi = mysql_query($requetStageEmploi) or die ("Erreur de la base de données.");
+	$stageEmploi = mysql_fetch_row($resultStageEmploi);
+
+	// On effectue la requête afin d'afficher la dernière annonce de la catégorie covoiturage			
+	$requetCovoiturage = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Covoiturage' ORDER BY Annonce.IdAnn DESC";
+	$resultCovoiturage = mysql_query($requetCovoiturage) or die ("Erreur de la base de données.");
+	$covoiturage = mysql_fetch_row($resultCovoiturage);
+
+	// On effectue la requête afin d'afficher la dernière annonce de la catégorie orientation			
+	$requetOrientation = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Orientation' ORDER BY Annonce.IdAnn DESC";
+	$resultOrientation = mysql_query($requetOrientation) or die ("Erreur de la base de données.");
+	$orientation = mysql_fetch_row($resultOrientation);
+
+	// On effectue la requête afin d'afficher la dernière annonce de la catégorie loisirs			
+	$requetLoisir = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Loisir' ORDER BY Annonce.IdAnn DESC";
+	$resultLoisir = mysql_query($requetLoisir) or die ("Erreur de la base de données.");
+	$loisir = mysql_fetch_row($resultLoisir);
+
+	// fonction pour convertir la date en format français et en format texte
+	function datefr($date) { 
+		$split = explode("-",$date); 
+		$annee = $split[0]; 
+		$mois = $split[1]; 
+		$jour = $split[2];
+		switch ($mois){
+	        case 01:
+                $moistxt = ' janvier ';
+                break;
+			case 02:
+                $moistxt = ' février ';
+                break;
+	        case 03:
+                $moistxt = ' mars ';
+                break;
+	        case 04:
+                $moistxt = ' avril ';
+                break;
+	        case 05:
+                $moistxt = ' mai ';
+                break;
+	        case 06:
+                $moistxt = ' juin ';
+                break;
+	        case 07:
+                $moistxt = ' juillet ';
+                break;
+	        case 08:
+                $moistxt = ' août ';
+                break;
+	        case 09:
+                $moistxt = ' septembre ';
+                break;
+	        case 10:
+                $moistxt = ' octobre ';
+                break;
+			case 11:
+                $moistxt = ' novembre ';
+                break;
+			case 12:
+                $moistxt = ' décembre ';
+		}
+		return "$jour"." "."$moistxt"." "."$annee";
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="fr"><![endif]-->
 <!--[if IE 9 ]><html class="ie9" lang="fr"><![endif]-->
@@ -34,7 +123,6 @@
 					<div class="right_bar">
 					
 							<?php 
-								session_start();
 								if (!isset($_SESSION['mail'])) {
 									?><div id="connexion">
 										<div class="connect">
@@ -69,7 +157,11 @@
 						<a href="index.php" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
 					</div><!-- /logo -->
 					<div id="poster_ann">
-						<a href="post_ann.php"><p>Déposer une annonce</p></a>
+						<?php
+							if (isset($_SESSION['mail'])) {
+								echo "<a href='post_ann.php'><p>Déposer une annonce</p></a>";
+							}
+						?>
 					</div>
 				</div><!-- /row -->
 			</div><!-- /b head -->
@@ -117,17 +209,17 @@
 							<div class="title color1">
 								<h4>Événements</h4>
 							</div><!-- /title bar -->
-
+							
 							<div class="grid_4 alpha">
-								<a href="annonce.php"><img src="images/assets/r_4.jpg" alt=""></a>
+								<?php echo "<a href='annonce.php?id=".$evenement[0]."'><img src='../imgAnnonce/".$evenement[7].".jpg'/></a>"; ?>
 							</div><!-- /grid4 alpha -->
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3> <a href="annonce.php">Titre annonce</a> </h3><p class="com_post"> - 0 commentaires</p>
-									<p class="date_content"> Date  -  Localisation
-									<br />Prix</p>
-									<p class="description_content"> Lorem Ipsum is simply dummy text of the printing and typesetting industry unknown printer took a galley of type and scrambled it to make a type has survived not only fiv... </p>
+									<h3><?php echo "<a href='annonce.php?id=".$evenement[0]."'>".$evenement[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<p class="date_content"> <?php echo datefr($evenement[6])." - ".$evenement[5];?>
+									<br /><?php echo $evenement[2]; ?> €</p>
+									<p class="description_content"><?php echo $evenement[4]; ?></p>
 								</div><!-- /post content -->
 							</div><!-- /grid8 omega -->
 						</div><!-- /post-->
@@ -138,17 +230,17 @@
 							</div><!-- /title bar -->
 
 							<div class="grid_4 alpha">
-								<a href="annonce.php"><img src="images/assets/r_5.jpg" alt=""></a>
+								<?php echo "<a href='annonce.php?id=".$petiteannonce[0]."'><img src='../imgAnnonce/".$petiteannonce[7].".jpg'/></a>"; ?>
 							</div><!-- /grid4 alpha -->
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3> <a href="annonce.php">Titre annonce</a> </h3><p class="com_post"> - 0 commentaires</p>
-									<p class="date_content"> Date  -  Localisation
-									<br />Prix</p>
-									<p class="description_content"> Lorem Ipsum is simply dummy text of the printing and typesetting industry unknown printer took a galley of type and scrambled it to make a type has survived not only fiv... </p>
-								</div>
-							</div>
+									<h3><?php echo "<a href='annonce.php?id=".$petiteannonce[0]."'>".$petiteannonce[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<p class="date_content"> <?php echo datefr($petiteannonce[6])." - ".$petiteannonce[5];?>
+									<br /><?php echo $petiteannonce[2]; ?> €</p>
+									<p class="description_content"><?php echo $petiteannonce[4]; ?></p>
+								</div><!-- /post content -->
+							</div><!-- /grid8 omega -->
 						</div>
 
 						<div class="mbf clearfix">
@@ -157,17 +249,17 @@
 							</div><!-- /title bar -->
 
 							<div class="grid_4 alpha">
-								<a href="annonce.php"><img src="images/assets/r_5.jpg" alt=""></a>
+								<?php echo "<a href='annonce.php?id=".$logement[0]."'><img src='../imgAnnonce/".$logement[7].".jpg'/></a>"; ?>
 							</div><!-- /grid4 alpha -->
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3> <a href="annonce.php">Titre annonce</a> </h3><p class="com_post"> - 0 commentaires</p>
-									<p class="date_content"> Date  -  Localisation
-									<br />Prix</p>
-									<p class="description_content"> Lorem Ipsum is simply dummy text of the printing and typesetting industry unknown printer took a galley of type and scrambled it to make a type has survived not only fiv... </p>
-								</div>
-							</div>
+									<h3><?php echo "<a href='annonce.php?id=".$logement[0]."'>".$logement[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<p class="date_content"> <?php echo datefr($logement[6])." - ".$logement[5];?>
+									<br /><?php echo $logement[2]; ?> €</p>
+									<p class="description_content"><?php echo $logement[4]; ?></p>
+								</div><!-- /post content -->
+							</div><!-- /grid8 omega -->
 						</div>
 
 						<div class="mbf clearfix">
@@ -176,17 +268,17 @@
 							</div><!-- /title bar -->
 
 							<div class="grid_4 alpha">
-								<a href="annonce.php"><img src="images/assets/r_5.jpg" alt=""></a>
+								<?php echo "<a href='annonce.php?id=".$stageEmploi[0]."'><img src='../imgAnnonce/".$stageEmploi[7].".jpg'/></a>"; ?>
 							</div><!-- /grid4 alpha -->
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3> <a href="annonce.php">Titre annonce</a> </h3><p class="com_post"> - 0 commentaires</p>
-									<p class="date_content"> Date  -  Localisation
-									<br />Prix</p>
-									<p class="description_content"> Lorem Ipsum is simply dummy text of the printing and typesetting industry unknown printer took a galley of type and scrambled it to make a type has survived not only fiv... </p>
-								</div>
-							</div>
+									<h3><?php echo "<a href='annonce.php?id=".$stageEmploi[0]."'>".$stageEmploi[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<p class="date_content"> <?php echo datefr($stageEmploi[6])." - ".$stageEmploi[5];?>
+									<br /><?php echo $stageEmploi[2]; ?> €</p>
+									<p class="description_content"><?php echo $stageEmploi[4]; ?></p>
+								</div><!-- /post content -->
+							</div><!-- /grid8 omega -->
 						</div>
 
 						<div class="mbf clearfix">
@@ -195,17 +287,17 @@
 							</div><!-- /title bar -->
 
 							<div class="grid_4 alpha">
-								<a href="annonce.php"><img src="images/assets/r_5.jpg" alt=""></a>
+								<?php echo "<a href='annonce.php?id=".$covoiturage[0]."'><img src='../imgAnnonce/".$covoiturage[7].".jpg'/></a>"; ?>
 							</div><!-- /grid4 alpha -->
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3> <a href="annonce.php">Titre annonce</a> </h3><p class="com_post"> - 0 commentaires</p>
-									<p class="date_content"> Date  -  Localisation
-									<br />Prix</p>
-									<p class="description_content"> Lorem Ipsum is simply dummy text of the printing and typesetting industry unknown printer took a galley of type and scrambled it to make a type has survived not only fiv... </p>
-								</div>
-							</div>
+									<h3><?php echo "<a href='annonce.php?id=".$covoiturage[0]."'>".$covoiturage[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<p class="date_content"> <?php echo datefr($covoiturage[6])." - ".$covoiturage[5];?>
+									<br /><?php echo $covoiturage[2]; ?> €</p>
+									<p class="description_content"><?php echo $covoiturage[4]; ?></p>
+								</div><!-- /post content -->
+							</div><!-- /grid8 omega -->
 						</div>
 
 						<div class="mbf clearfix">
@@ -214,17 +306,17 @@
 							</div><!-- /title bar -->
 
 							<div class="grid_4 alpha">
-								<a href="annonce.php"><img src="images/assets/r_5.jpg" alt=""></a>
+								<?php echo "<a href='annonce.php?id=".$orientation[0]."'><img src='../imgAnnonce/".$orientation[7].".jpg'/></a>"; ?>
 							</div><!-- /grid4 alpha -->
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3> <a href="annonce.php">Titre annonce</a> </h3><p class="com_post"> - 0 commentaires</p>
-									<p class="date_content"> Date  -  Localisation
-									<br />Prix</p>
-									<p class="description_content"> Lorem Ipsum is simply dummy text of the printing and typesetting industry unknown printer took a galley of type and scrambled it to make a type has survived not only fiv... </p>
-								</div>
-							</div>
+									<h3><?php echo "<a href='annonce.php?id=".$orientation[0]."'>".$orientation[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<p class="date_content"> <?php echo datefr($orientation[6])." - ".$orientation[5];?>
+									<br /><?php echo $orientation[2]; ?> €</p>
+									<p class="description_content"><?php echo $orientation[4]; ?></p>
+								</div><!-- /post content -->
+							</div><!-- /grid8 omega -->
 						</div>
 
 						<div class="mbf clearfix">
@@ -233,17 +325,17 @@
 							</div><!-- /title bar -->
 
 							<div class="grid_4 alpha">
-								<a href="annonce.php"><img src="images/assets/r_5.jpg" alt=""></a>
+								<?php echo "<a href='annonce.php?id=".$loisir[0]."'><img src='../imgAnnonce/".$loisir[7].".jpg'/></a>"; ?>
 							</div><!-- /grid4 alpha -->
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3> <a href="annonce.php">Titre annonce</a> </h3><p class="com_post"> - 0 commentaires</p>
-									<p class="date_content"> Date  -  Localisation
-									<br />Prix</p>
-									<p class="description_content"> Lorem Ipsum is simply dummy text of the printing and typesetting industry unknown printer took a galley of type and scrambled it to make a type has survived not only fiv... </p>
-								</div>
-							</div>
+									<h3><?php echo "<a href='annonce.php?id=".$loisir[0]."'>".$loisir[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<p class="date_content"> <?php echo datefr($loisir[6])." - ".$loisir[5];?>
+									<br /><?php echo $loisir[2]; ?> €</p>
+									<p class="description_content"><?php echo $loisir[4]; ?></p>
+								</div><!-- /post content -->
+							</div><!-- /grid8 omega -->
 						</div>
 
 

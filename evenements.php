@@ -19,7 +19,7 @@
 			mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
 						
 			// On effectue la requête afin d'afficher toutes les annonces de la catégorie événement			
-			$requetEvenements = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image, Membre WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Evenement'";
+			$requetEvenements = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND Annonce.CatAnn='Evenement' ORDER BY Annonce.IdAnn";
 			$resultEvenements = mysql_query($requetEvenements) or die ("Erreur de la base de données.");
 			while($evenements = mysql_fetch_row($resultEvenements)) {
 				// le lien renvoie vers l'annonce sélectionnée grâce à l'ID récupéré par la méthode GET
