@@ -5,12 +5,13 @@
 		$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
 		$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
 		$profil=mysql_fetch_row($resultProfil);
-	}
+	
 
-	// Requête qui permet de vérifier s'il le membre a recu des nouveaux messages non lus
-	$requetnotifmess = "SELECT * FROM Message WHERE IdReceiver='".$profil[0]."' AND EtatMess='Non lu'";
-	$resultnotifmess = mysql_query($requetnotifmess) or die ("Erreur de la base de données.");
-	$notifmess = mysql_num_rows($resultnotifmess);
+		// Requête qui permet de vérifier s'il le membre a recu des nouveaux messages non lus
+		$requetnotifmess = "SELECT * FROM Message WHERE IdReceiver='".$profil[0]."' AND EtatMess='Non lu'";
+		$resultnotifmess = mysql_query($requetnotifmess) or die ("Erreur de la base de données.");
+		$notifmess = mysql_num_rows($resultnotifmess);
+	}
 ?>
 <header id="header">
 	<div class="a_head">

@@ -327,9 +327,9 @@
 											<input type="hidden" name="idProfil" value="<?php echo $profil[0] ?>">
 											<input type="hidden" name="idAnnonce" value="<?php echo $idSelect ?>">
 											<textarea id="inputcom" name="post_com" cols="100" rows="3" placeholder="Votre commentaire"></textarea>
-											<button type="submit">Envoyer</button>
+											<button id="submitmessage" type="submit">Envoyer</button>
 										</form><!-- /form -->
-									</div><!-- /s form -->
+									</div><br/><!-- /s form -->
 								<?php } ?>	
 								<div id="liste_commentaires">
 								<h4>Commentaires :</h4>
@@ -354,7 +354,7 @@
 					</div><!-- end grid8 -->
 				</div><!-- end grid9 -->
 
-					<?php include('../barreLaterale.php'); ?>
+				<?php include('../barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 
