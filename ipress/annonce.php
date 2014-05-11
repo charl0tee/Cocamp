@@ -4,11 +4,15 @@
 	include("../connect_bdd.php");
 
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
+
+
 	
-	// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
-	$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
-	$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
-	$profil=mysql_fetch_row($resultProfil);
+	if (isset($_SESSION['mail'])) {
+		// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
+		$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
+		$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
+		$profil=mysql_fetch_row($resultProfil);
+	}	
 
 	// On récupère l'ID de l'annonce sur laquelle l'utilisateur a cliqué
 	$idSelect = $_GET['id'];
@@ -17,51 +21,101 @@
 	$requetTitre = "SELECT TitreAnn FROM Annonce WHERE IdAnn='".$idSelect."'";
 	$resultTitre = mysql_query($requetTitre) or die ("Erreur de la base de données.");
 	$titre=mysql_fetch_row($resultTitre);
-// fonction pour convertir la date en format français et en format texte
-	function datefr($date) { 
-		$split = explode("-",$date); 
-		$annee = $split[0]; 
-		$mois = $split[1]; 
-		$jour = $split[2];
-		switch ($mois){
-	        case 01:
-                $moistxt = ' janvier ';
-                break;
-			case 02:
-                $moistxt = ' février ';
-                break;
-	        case 03:
-                $moistxt = ' mars ';
-                break;
-	        case 04:
-                $moistxt = ' avril ';
-                break;
-	        case 05:
-                $moistxt = ' mai ';
-                break;
-	        case 06:
-                $moistxt = ' juin ';
-                break;
-	        case 07:
-                $moistxt = ' juillet ';
-                break;
-	        case 08:
-                $moistxt = ' août ';
-                break;
-	        case 09:
-                $moistxt = ' septembre ';
-                break;
-	        case 10:
-                $moistxt = ' octobre ';
-                break;
-			case 11:
-                $moistxt = ' novembre ';
-                break;
-			case 12:
-                $moistxt = ' décembre ';
+	// fonction pour convertir la date en format français et en format texte //DATE
+		function datefr($date) { 
+			$split = explode("-",$date); 
+			$annee = $split[0]; 
+			$mois = $split[1]; 
+			$jour = $split[2];
+			switch ($mois){
+		        case 01:
+	                $moistxt = ' janvier ';
+	                break;
+				case 02:
+	                $moistxt = ' février ';
+	                break;
+		        case 03:
+	                $moistxt = ' mars ';
+	                break;
+		        case 04:
+	                $moistxt = ' avril ';
+	                break;
+		        case 05:
+	                $moistxt = ' mai ';
+	                break;
+		        case 06:
+	                $moistxt = ' juin ';
+	                break;
+		        case 07:
+	                $moistxt = ' juillet ';
+	                break;
+		        case 08:
+	                $moistxt = ' août ';
+	                break;
+		        case 09:
+	                $moistxt = ' septembre ';
+	                break;
+		        case 10:
+	                $moistxt = ' octobre ';
+	                break;
+				case 11:
+	                $moistxt = ' novembre ';
+	                break;
+				case 12:
+	                $moistxt = ' décembre ';
+			}
+			return "$jour"." "."$moistxt"." "."$annee";
 		}
-		return "$jour"." "."$moistxt"." "."$annee";
-	}
+
+		// fonction pour convertir la date en format français et en format texte //DATETIME
+		function datefrCOM($date) { 
+			$splitTime = explode(" ",$date); 
+
+			$split = explode("-", $splitTime[0]);
+			$annee = $split[0]; 
+			$mois = $split[1]; 
+			$jour = $split[2];
+			switch ($mois){
+		        case 01:
+	                $moistxt = ' janvier ';
+	                break;
+				case 02:
+	                $moistxt = ' février ';
+	                break;
+		        case 03:
+	                $moistxt = ' mars ';
+	                break;
+		        case 04:
+	                $moistxt = ' avril ';
+	                break;
+		        case 05:
+	                $moistxt = ' mai ';
+	                break;
+		        case 06:
+	                $moistxt = ' juin ';
+	                break;
+		        case 07:
+	                $moistxt = ' juillet ';
+	                break;
+		        case 08:
+	                $moistxt = ' août ';
+	                break;
+		        case 09:
+	                $moistxt = ' septembre ';
+	                break;
+		        case 10:
+	                $moistxt = ' octobre ';
+	                break;
+				case 11:
+	                $moistxt = ' novembre ';
+	                break;
+				case 12:
+	                $moistxt = ' décembre ';
+			}
+			return "$jour"." "."$moistxt"." "."$annee"." à "."$splitTime[1]";
+		}	
+
+
 	
 	// On récupère la date de l'annonce sélectionnée
 	$requetDateAnn = "SELECT DateAnn FROM Annonce WHERE IdAnn='".$idSelect."'";
@@ -94,6 +148,10 @@
 	$requetDescr = "SELECT DescrAnn FROM Annonce WHERE IdAnn='".$idSelect."'";
 	$resultDescr = mysql_query($requetDescr) or die ("Erreur de la base de données.");
 	$descr=mysql_fetch_row($resultDescr);
+
+	// On récupère les commentaires
+	$requetCom = "SELECT * FROM commentaire WHERE IdAnn='".$idSelect."' ORDER BY DateCom Desc ";
+	$resultCom = mysql_query($requetCom) or die ("Erreur de la base de données.");
 ?>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
@@ -103,6 +161,9 @@
 	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<!-- Seo Meta -->
+		<meta name="description" content="">
+		<meta name="keywords" content="">
 
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
@@ -113,6 +174,8 @@
 
 	<!-- Favicon -->
 		<link rel="shortcut icon" href="images/favicon.ico">
+		<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
 	<!--[if IE]>
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=EmulateIE8; IE=EDGE" />
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -142,8 +205,8 @@
 									</div> <!-- /connexion --> 
 							<?php
 									echo "<div id='inscription'>
-									<a href='inscription.php' class='' title=''>S'inscrire</a>
-									</div><!-- /inscription -->";
+													<a href='inscription.php' class='' title=''>S'inscrire</a>
+												</div><!-- /inscription -->";
 								}
 								else{
 									echo "<div id='deconnexion'> <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
@@ -158,7 +221,7 @@
 			<div class="b_head">
 				<div class="row clearfix">
 					<div class="logo">
-						<a href="index.php" title=""><img src="images/logo.png" alt=""></a>
+						<a href="index.php" title="iPress - Responsive News/Blog/Magazine HTML5"><img src="images/logo.png" alt="iPress - Responsive News/Blog/Magazine HTML5"></a>
 					</div><!-- /logo -->
 					<div id="poster_ann">
 						<?php
@@ -257,72 +320,41 @@
 								?>
 							</p>
 						</div><!-- /single post -->
-						<div id="commentaires">
-							<div class="com_form">
-								<form action="../post_commentaire.php" id="comform" method="post">
-									<textarea id="inputcom" name="post_com" cols="100" rows="3" placeholder="Votre commentaire"></textarea>
-									<button type="submit">Envoyer</button>
-								</form><!-- /form -->
-							</div><!-- /s form -->
-							<div id="liste_commentaires">
-							</div>
-						</div>	
+							<div id="commentaires">
+								<?php if (isset($_SESSION['mail'])) { ?>
+									<div class="com_form">
+										<form action="../post_commentaire.php" id="comform" method="post">
+											<input type="hidden" name="idProfil" value="<?php echo $profil[0] ?>">
+											<input type="hidden" name="idAnnonce" value="<?php echo $idSelect ?>">
+											<textarea id="inputcom" name="post_com" cols="100" rows="3" placeholder="Votre commentaire"></textarea>
+											<button type="submit">Envoyer</button>
+										</form><!-- /form -->
+									</div><!-- /s form -->
+								<?php } ?>	
+								<div id="liste_commentaires">
+								<h4>Commentaires :</h4>
+								<?php 
+									while ($commentaire=mysql_fetch_row($resultCom)){
+										// On récupère les commentaires$
+										$requetPhotoProfil = "SELECT NomMembre, PrenomMembre, PhotoMembre FROM membre WHERE IdMembre='".$commentaire[1]."'";
+										$resultPhotoProfil = mysql_query($requetPhotoProfil) or die ("Erreur de la base de données.");
+										$photoProfil=mysql_fetch_row($resultPhotoProfil);
+										
+										?><div class="commentaire">
+											<div class="photoProfil"><?php
+											echo "<img width='60' height'60' src='../imgProfil/".$photoProfil[2].".jpg'>";
+										?></div> <?php	
+											echo "<p><strong>".$photoProfil[1]." ".$photoProfil[0]."</strong> - ".datefrCOM($commentaire[4])."</p>";
+											echo "<p>".$commentaire[3]."</p>";
+										?></div><?php	
+									} 
+								?>
+								</div>
+							</div>			
 					</div><!-- end grid8 -->
 				</div><!-- end grid9 -->
 
-				<div class="grid_3 omega sidebar sidebar_a">
-					<div class="widget">
-						<ul class="counter clearfix">
-							<li class="twitter">
-								<a href="index.html#"><i class="fa fa-twitter"></i></a>
-								<span> 2545 <br> Followers </span>
-							</li>
-							<li class="facebook">
-								<a href="index.html#"><i class="fa fa-facebook"></i></a>
-								<span> 1317 <br> Likes </span>
-							</li>
-						</ul>
-					</div><!-- widget réseaux sociaux -->
-
-					<div class="widget">
-							<div id="calendar_wrap"><table id="wp-calendar">
-								<caption>Avril 2014</caption>
-									<thead>
-										<tr>
-											<th scope="col" title="Monday">L</th>
-											<th scope="col" title="Tuesday">M</th>
-											<th scope="col" title="Wednesday">M</th>
-											<th scope="col" title="Thursday">J</th>
-											<th scope="col" title="Friday">V</th>
-											<th scope="col" title="Saturday">S</th>
-											<th scope="col" title="Sunday">D</th>
-										</tr>
-									</thead>
-							
-									<tfoot>
-										<tr>
-											<td colspan="3" id="prev"><a href="index.html#" title="View posts for December 2013">« Dec</a></td>
-											<td class="pad">&nbsp;</td>
-											<td colspan="3" id="next" class="pad">&nbsp;</td>
-										</tr>
-									</tfoot>
-							
-									<tbody>
-										<tr><td colspan="2" class="pad">&nbsp;</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-										<tr><td>6</td><td>7</td><td id="today">8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
-										<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr>
-										<tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr>
-										<tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td class="pad" colspan="2">&nbsp;</td></tr>
-									</tbody>
-								</table>
-							</div>
-						</div><!-- widget calendrier -->
-
-					<div class="widget">
-						<div class="title"><h4>Commentaires récents</h4></div>
-					</div><!-- /widget commentaires récents -->
-
-				</div><!-- /grid3 barre latérale -->
+					<?php include('../barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

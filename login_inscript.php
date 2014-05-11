@@ -7,6 +7,7 @@
 	</head>
 	<body>
 		<?php
+
 			//Connexion à la base de données
 			include("connect_bdd.php");
 			

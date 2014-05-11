@@ -2770,3 +2770,28 @@ p.description{
 .profil{
 	margin-bottom: 12px;
 }
+
+.photoProfil{
+	float: left;
+	margin-right: 10px;
+}
+
+#liste_commentaires p{
+	margin-bottom: 0 ;
+}
+
+.commentaire{
+	margin-bottom: 10px;
+	border-bottom: 1px solid  #c5c5c5;
+	padding-bottom: 5px;
+}
+
+.commentaireRecent{
+	margin-bottom: 10px;
+	border-bottom: 1px solid  #c5c5c5;
+	padding-bottom: 10px;
+}
+
+.commentaireRecent p{
+	margin-bottom: 10px;
+}
