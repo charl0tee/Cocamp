@@ -256,24 +256,17 @@
 									echo $descr[0];  
 								?>
 							</p>
-							<br />
 						</div><!-- /single post -->
-
-						<div class="disqus_comments">
-							<!-- Disqus Comment Form -->
-								<div id="disqus_thread"></div>
-								<script type="text/javascript">
-								/* <![CDATA[ */
-									var disqus_shortname = 'officialtemplate';
-									(function() {
-										var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-										dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-										(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-									})();
-								/* ]]> */
-								</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-							<!-- Disqus Comment Form -->
-						</div><!-- /comments -->
+						<div id="commentaires">
+							<div class="com_form">
+								<form action="../post_commentaire.php" id="comform" method="post">
+									<textarea id="inputcom" name="post_com" cols="100" rows="3" placeholder="Votre commentaire"></textarea>
+									<button type="submit">Envoyer</button>
+								</form><!-- /form -->
+							</div><!-- /s form -->
+							<div id="liste_commentaires">
+							</div>
+						</div>	
 					</div><!-- end grid8 -->
 				</div><!-- end grid9 -->
 

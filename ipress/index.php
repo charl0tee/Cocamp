@@ -6,10 +6,13 @@
 
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
 	
-	// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
-	$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
-	$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
-	$profil=mysql_fetch_row($resultProfil);
+
+	if(isset ($_SESSION['mail'])){
+		// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
+		$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
+		$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
+		$profil=mysql_fetch_row($resultProfil);
+	}	
 
 	// On effectue la requête afin d'afficher la dernière annonce de la catégorie événement			
 	$requeteEvenement = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Evenement' ORDER BY Annonce.IdAnn DESC";
