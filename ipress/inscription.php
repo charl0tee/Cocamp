@@ -1,19 +1,15 @@
 <?php
 	session_start();
+	
 	//Connexion à la base de données
 	include("../connect_bdd.php");
 
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
-
-	// On récupère l'ID du membre qui est connecté pour que l'utilisateur puisse accéder à son profil
-	$requetProfil="SELECT IdMembre FROM Membre WHERE MailMembre='".$_SESSION['mail']."'";
-	$resultProfil=mysql_query($requetProfil) or die("Erreur de base de données.");
-	$profil=mysql_fetch_row($resultProfil);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
 <!--[if IE 9 ]><html class="ie9" lang="en"><![endif]-->
-<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><!--<![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR"><!--<![endif]-->
 <head>
 	<title>Cocamp</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -35,89 +31,8 @@
 </head>
 <body>
 	<div id="layout" class="boxed">
-		<header id="header">
-			<div class="a_head">
-				<div class="row clearfix">
-					<div class="right_bar">
-					
-							<?php 
-								
-								if (!isset($_SESSION['mail'])) {
-									?><div id="connexion">
-										<div class="connect">
-											<a>Se connecter</a>	
-										</div>
-										<div class="c_form">
-											<form action="../login_connect.php" id="connexionform" method="post">
-												<input id="inputmail" name="mail_connect" type="text" onfocus="if (this.value=='Email') this.value = '';" onblur="if (this.value=='') this.value = 'Email';" value="Email" placeholder="Email">
-												<input id="inputmdp" name="mdp_connect" type="password" onfocus="if (this.value=='Mot de passe') this.value = '';" onblur="if (this.value=='') this.value = 'Mot de passe';" value="Mot de passe" placeholder="Mot de passe">
-												<button type="submit">Valider</button>
-											</form><!-- /form -->
-										</div><!-- /s form -->
-									</div> <!-- /connexion --> 
-							<?php
-									echo "<div id='inscription'>
-													<a href='inscription.php' class='' title=''>S'inscrire</a>
-												</div><!-- /inscription -->";
-								}
-								else{
-									echo "<div id='deconnexion'> <a href='profil.php?id=".$profil[0]."'>Bonjour ".$_SESSION['prenom']."</a><a href='../logout.php'>Se déconnecter</a></div>";
-								}	
-							?>
-						
-						<span id="date_time"></span><!-- /date -->
-					</div><!-- /right bar -->
-				</div><!-- /row -->
-			</div><!-- /a head -->
-
-			<div class="b_head">
-				<div class="row clearfix">
-					<div class="logo">
-						<a href="index.php" title=""><img src="images/logo.png" alt=""></a>
-					</div><!-- /logo -->
-					<div id="poster_ann">
-						<?php
-							if (isset($_SESSION['mail'])) {
-								echo "<a href='post_ann.php'><p>Déposer une annonce</p></a>";
-							}
-						?>
-					</div>
-				</div><!-- /row -->
-			</div><!-- /b head -->
-
-			<div class="row clearfix">
-				<div class="c_head clearfix">
-					<nav>
-						<ul class="sf-menu">
-							<li class="current colordefault home_class"><a href="index.php"><i class="icon-home"></i></a>
-							</li>
-							<li class="color1"><a href="evenement.php">Événements</a>
-							</li>
-							<li class="color2"><a href="petitesannonces.php">Petites annonces</a>
-							</li>
-							<li class="color3"><a href="logement.php">Logements</a>
-							</li>
-							<li class="color4"><a href="stageemploi.php">Stages / Emplois</a></li>
-							<li class="color5"><a href="covoiturage.php">Covoiturage</a></li>
-							<li class="color6"><a href="orientation.php">Orientation</a></li>
-							<li class="color7"><a href="loisirs.php">Loisirs</a></li>
-						</ul><!-- /menu -->
-					</nav><!-- /nav -->
-
-					<div class="right_icons">
-						<div class="search">
-							<div class="search_icon"><a href="messagerie.php"><i class="icon-message"></i></a></div>
-							<div class="s_form">
-								<form action="search_result.html" id="search" method="get">
-									<input id="inputhead" name="search" type="text" onfocus="if (this.value=='Recherche') this.value = '';" onblur="if (this.value=='') this.value = 'Recherche';" value="Recherche" placeholder="Recherche">
-									<button type="submit"><i class="fa-search"></i></button>
-								</form><!-- /form -->
-							</div><!-- /s form -->
-						</div><!-- /search -->
-					</div><!-- /right icons -->
-				</div><!-- /c head -->
-			</div><!-- /row -->
-		</header><!-- /header -->
+		
+		<?php include("header.php"); ?>
 
 		<div class="page-content">
 			<div class="row clearfix">

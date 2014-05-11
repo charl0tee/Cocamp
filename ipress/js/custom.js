@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
 	// $('body').append('<script type="text/javascript" src="customizer/script.js"></script>');
 
 	// Superfish
-	if ($(".sf-menu")[0]) {
+	/*if ($(".sf-menu")[0]) {
 		$('.sf-menu').superfish({
 			delay: 100,
 			autoArrows: true,
@@ -18,7 +18,7 @@ jQuery(document).ready(function ($) {
 			speed: 300
 		});
 		$('.sf-menu li li .sf-sub-indicator i').removeClass('fa-chevron-down').addClass('fa-chevron-right');
-	}
+	}*/
 	// Tabs
 	var tabs = jQuery('ul.tabs');
 	tabs.each(function (i) {
@@ -206,6 +206,18 @@ jQuery(document).ready(function ($) {
 	$('#connexion').click(function(e) {
 		e.stopPropagation();
 	});
+
+	//Menu catégorie current
+	/*$("ul.sf-menu li").click(function() {
+		if($(this).hasClass('current')){
+			$('ul.sf-menu li').removeClass('current');
+			$(this).addClass('current');
+		}
+		else{
+			$('.sf-menu li').removeClass('current');
+			$(this).addClass('current');
+		}
+	});*/
 
 	// Notification
 	$(".notification-close").click(function () {

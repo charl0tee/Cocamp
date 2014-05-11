@@ -27,7 +27,7 @@
 				$contenuMess=$_POST['message'];
 				$emetteur=$membre[0];
 
-				$requetMessage="INSERT INTO Message (IdSender, IdReceiver, ContenuMess, DateMess) values ('$emetteur', '$destinataire', '".mysql_real_escape_string($contenuMess)."', '$dateMess')";	
+				$requetMessage="INSERT INTO Message (IdSender, IdReceiver, ContenuMess, DateMess, EtatMess) values ('$emetteur', '$destinataire', '".mysql_real_escape_string($contenuMess)."', '$dateMess', 'Non lu')";	
 				mysql_query($requetMessage) or die("erreur requête".mysql_error());
 
 				echo "<script>alert('Votre message a bien été envoyé !')</script>";
