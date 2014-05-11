@@ -10,36 +10,71 @@
 	$requeteEvenement = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Evenement' ORDER BY Annonce.IdAnn DESC";
 	$resultEvenement = mysql_query($requeteEvenement) or die ("Erreur de la base de données.");
 	$evenement = mysql_fetch_row($resultEvenement);
+
+	// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Evenement 
+	$requeteEvenementCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$evenement[0]'";
+	$resultEvenementCom = mysql_query($requeteEvenementCom) or die ("Erreur de la base de données.");
+	$evenementCom = mysql_fetch_row($resultEvenementCom);
 	
 	// On effectue la requête afin d'afficher la dernière annonce de la catégorie petite annonce			
 	$requetPetiteannonce = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='PetiteAnnonce' ORDER BY Annonce.IdAnn DESC";
 	$resultPetiteannonce = mysql_query($requetPetiteannonce) or die ("Erreur de la base de données.");
 	$petiteannonce = mysql_fetch_row($resultPetiteannonce);
 
+	// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Petites annonces
+	$requetePetiteannonceCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$petiteannonce[0]'";
+	$resultPetiteannonceCom = mysql_query($requetePetiteannonceCom) or die ("Erreur de la base de données.");
+	$petiteannonceCom = mysql_fetch_row($resultPetiteannonceCom);
+
 	// On effectue la requête afin d'afficher la dernière annonce de la catégorie logement			
 	$requetLogement = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Logement' ORDER BY Annonce.IdAnn DESC";
 	$resultLogement = mysql_query($requetLogement) or die ("Erreur de la base de données.");
 	$logement = mysql_fetch_row($resultLogement);
+
+	// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Logement 
+	$requeteLogementCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$logement[0]'";
+	$resultLogementCom = mysql_query($requeteLogementCom) or die ("Erreur de la base de données.");
+	$logementCom = mysql_fetch_row($resultLogementCom);
 
 	// On effectue la requête afin d'afficher la dernière annonce de la catégorie stage/emploi			
 	$requetStageEmploi = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='StageEmploi' ORDER BY Annonce.IdAnn DESC";
 	$resultStageEmploi = mysql_query($requetStageEmploi) or die ("Erreur de la base de données.");
 	$stageEmploi = mysql_fetch_row($resultStageEmploi);
 
+	// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Stage Emploi 
+	$requeteStageEmploiCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$stageEmploi[0]'";
+	$resultStageEmploiCom = mysql_query($requeteStageEmploiCom) or die ("Erreur de la base de données.");
+	$stageEmploiCom = mysql_fetch_row($resultStageEmploiCom);
+
 	// On effectue la requête afin d'afficher la dernière annonce de la catégorie covoiturage			
 	$requetCovoiturage = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Covoiturage' ORDER BY Annonce.IdAnn DESC";
 	$resultCovoiturage = mysql_query($requetCovoiturage) or die ("Erreur de la base de données.");
 	$covoiturage = mysql_fetch_row($resultCovoiturage);
+
+	// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Covoiturage 
+	$requeteCovoiturageCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$covoiturage[0]'";
+	$resultCovoiturageCom = mysql_query($requeteCovoiturageCom) or die ("Erreur de la base de données.");
+	$covoiturageCom = mysql_fetch_row($resultCovoiturageCom);
 
 	// On effectue la requête afin d'afficher la dernière annonce de la catégorie orientation			
 	$requetOrientation = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Orientation' ORDER BY Annonce.IdAnn DESC";
 	$resultOrientation = mysql_query($requetOrientation) or die ("Erreur de la base de données.");
 	$orientation = mysql_fetch_row($resultOrientation);
 
+	// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Orientation 
+	$requeteOrientationCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$orientation[0]'";
+	$resultOrientationCom = mysql_query($requeteOrientationCom) or die ("Erreur de la base de données.");
+	$orientationCom = mysql_fetch_row($resultOrientationCom);
+
 	// On effectue la requête afin d'afficher la dernière annonce de la catégorie loisirs			
 	$requetLoisir = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Loisir' ORDER BY Annonce.IdAnn DESC";
 	$resultLoisir = mysql_query($requetLoisir) or die ("Erreur de la base de données.");
 	$loisir = mysql_fetch_row($resultLoisir);
+
+	// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Loisirs
+	$requeteLoisirsCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$loisir[0]'";
+	$resultLoisirsCom = mysql_query($requeteLoisirsCom) or die ("Erreur de la base de données.");
+	$loisirCom = mysql_fetch_row($resultLoisirsCom);
 
 	// fonction pour convertir la date en format français et en format texte
 	function datefr($date) { 
@@ -132,7 +167,7 @@
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3><?php echo "<a href='annonce.php?id=".$evenement[0]."'>".$evenement[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<h3><?php echo "<a href='annonce.php?id=".$evenement[0]."'>".$evenement[1]."</a>"; ?></h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$evenement[0]."#commentaires'>".$evenementCom[0] ?> commentaires</a></p>
 									<p class="date_content"> <?php echo datefr($evenement[6])." - ".$evenement[5];?>
 									<br /><?php echo $evenement[2]; ?> €</p>
 									<p class="description_content"><?php echo $evenement[4]; ?></p>
@@ -151,7 +186,7 @@
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3><?php echo "<a href='annonce.php?id=".$petiteannonce[0]."'>".$petiteannonce[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<h3><?php echo "<a href='annonce.php?id=".$petiteannonce[0]."'>".$petiteannonce[1]."</a>"; ?></h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$petiteannonce[0]."#commentaires'>".$petiteannonceCom[0] ?> commentaires</p>
 									<p class="date_content"> <?php echo datefr($petiteannonce[6])." - ".$petiteannonce[5];?>
 									<br /><?php echo $petiteannonce[2]; ?> €</p>
 									<p class="description_content"><?php echo $petiteannonce[4]; ?></p>
@@ -170,7 +205,7 @@
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3><?php echo "<a href='annonce.php?id=".$logement[0]."'>".$logement[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<h3><?php echo "<a href='annonce.php?id=".$logement[0]."'>".$logement[1]."</a>"; ?></h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$logement[0]."#commentaires'>".$logementCom[0] ?> commentaires</p>
 									<p class="date_content"> <?php echo datefr($logement[6])." - ".$logement[5];?>
 									<br /><?php echo $logement[2]; ?> €</p>
 									<p class="description_content"><?php echo $logement[4]; ?></p>
@@ -189,7 +224,7 @@
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3><?php echo "<a href='annonce.php?id=".$stageEmploi[0]."'>".$stageEmploi[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<h3><?php echo "<a href='annonce.php?id=".$stageEmploi[0]."'>".$stageEmploi[1]."</a>"; ?></h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$stageEmploi[0]."#commentaires'>".$stageEmploiCom[0] ?> commentaires</p>
 									<p class="date_content"> <?php echo datefr($stageEmploi[6])." - ".$stageEmploi[5];?>
 									<br /><?php echo $stageEmploi[2]; ?> €</p>
 									<p class="description_content"><?php echo $stageEmploi[4]; ?></p>
@@ -208,7 +243,7 @@
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3><?php echo "<a href='annonce.php?id=".$covoiturage[0]."'>".$covoiturage[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<h3><?php echo "<a href='annonce.php?id=".$covoiturage[0]."'>".$covoiturage[1]."</a>"; ?></h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$covoiturage[0]."#commentaires'>".$covoiturageCom[0] ?> commentaires</p>
 									<p class="date_content"> <?php echo datefr($covoiturage[6])." - ".$covoiturage[5];?>
 									<br /><?php echo $covoiturage[2]; ?> €</p>
 									<p class="description_content"><?php echo $covoiturage[4]; ?></p>
@@ -227,7 +262,7 @@
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3><?php echo "<a href='annonce.php?id=".$orientation[0]."'>".$orientation[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<h3><?php echo "<a href='annonce.php?id=".$orientation[0]."'>".$orientation[1]."</a>"; ?></h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$orientation[0]."#commentaires'>".$orientationCom[0] ?> commentaires</p>
 									<p class="date_content"> <?php echo datefr($orientation[6])." - ".$orientation[5];?>
 									<br /><?php echo $orientation[2]; ?> €</p>
 									<p class="description_content"><?php echo $orientation[4]; ?></p>
@@ -246,7 +281,7 @@
 
 							<div class="grid_8 omega">
 								<div class="post_content">
-									<h3><?php echo "<a href='annonce.php?id=".$loisir[0]."'>".$loisir[1]."</a>"; ?></h3><p class="com_post"> - 0 commentaires</p>
+									<h3><?php echo "<a href='annonce.php?id=".$loisir[0]."'>".$loisir[1]."</a>"; ?></h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$loisir[0]."#commentaires'>".$loisirCom[0] ?> commentaires</p>
 									<p class="date_content"> <?php echo datefr($loisir[6])." - ".$loisir[5];?>
 									<br /><?php echo $loisir[2]; ?> €</p>
 									<p class="description_content"><?php echo $loisir[4]; ?></p>
@@ -258,7 +293,7 @@
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
-				<?php include('../barreLaterale.php'); ?>
+				<?php include('barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

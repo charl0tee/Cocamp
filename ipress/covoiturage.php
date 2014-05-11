@@ -93,7 +93,12 @@
 							<h4>Covoiturage</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($covoiturage = mysql_fetch_row($resultCovoiturage)) { ?>
+						<?php while($covoiturage = mysql_fetch_row($resultCovoiturage)) {
+							// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Covoiturage 
+							$requeteCovoiturageCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$covoiturage[0]'";
+							$resultCovoiturageCom = mysql_query($requeteCovoiturageCom) or die ("Erreur de la base de données.");
+							$covoiturageCom = mysql_fetch_row($resultCovoiturageCom); 
+						?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
 									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$covoiturage[7].".jpg'/><br />"; ?></a>
@@ -101,7 +106,7 @@
 
 								<div class="grid_8 omega">
 									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$covoiturage[0]."'>".$covoiturage[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
+										<h3><?php echo "<a href='annonce.php?id=".$covoiturage[0]."'>".$covoiturage[1]."</a>"?> </h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$covoiturage[0]."#commentaires'>".$covoiturageCom[0] ?> commentaires</p>
 										<p class="date_content"> <?php echo datefr($covoiturage[6]) ?>  -  <?php echo $covoiturage[5] ?>
 										<br /><?php echo $covoiturage[2]."€"?></p>
 										<p class="description_content"> <?php echo $covoiturage[4] ?> </p>
@@ -112,7 +117,7 @@
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
-				<?php include('../barreLaterale.php'); ?>
+				<?php include('barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

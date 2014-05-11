@@ -93,7 +93,12 @@
 							<h4>Logements</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($logement = mysql_fetch_row($resultLogement)) { ?>
+						<?php while($logement = mysql_fetch_row($resultLogement)) { 
+							// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Logement 
+							$requeteLogementCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$logement[0]'";
+							$resultLogementCom = mysql_query($requeteLogementCom) or die ("Erreur de la base de données.");
+							$logementCom = mysql_fetch_row($resultLogementCom);
+						?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
 									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$logement[7].".jpg'/><br />"; ?></a>
@@ -101,7 +106,7 @@
 
 								<div class="grid_8 omega">
 									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$logement[0]."'>".$logement[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
+										<h3><?php echo "<a href='annonce.php?id=".$logement[0]."'>".$logement[1]."</a>"?> </h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$logement[0]."#commentaires'>".$logementCom[0] ?> commentaires</p>
 										<p class="date_content"> <?php echo datefr($logement[6]) ?>  -  <?php echo $logement[5] ?>
 										<br /><?php echo $logement[2]."€"?></p>
 										<p class="description_content"> <?php echo $logement[4] ?> </p>
@@ -112,7 +117,7 @@
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
-				<?php include('../barreLaterale.php'); ?>
+				<?php include('barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

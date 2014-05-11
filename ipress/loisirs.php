@@ -92,7 +92,12 @@
 							<h4>Loisirs</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($loisir = mysql_fetch_row($resultLoisir)) { ?>
+						<?php while($loisir = mysql_fetch_row($resultLoisir)) { 
+							// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Loisirs
+							$requeteLoisirsCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$loisir[0]'";
+							$resultLoisirsCom = mysql_query($requeteLoisirsCom) or die ("Erreur de la base de données.");
+							$loisirCom = mysql_fetch_row($resultLoisirsCom);
+						?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
 									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$loisir[7].".jpg'/><br />"; ?></a>
@@ -100,7 +105,7 @@
 
 								<div class="grid_8 omega">
 									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$loisir[0]."'>".$loisir[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
+										<h3><?php echo "<a href='annonce.php?id=".$loisir[0]."'>".$loisir[1]."</a>"?> </h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$loisir[0]."#commentaires'>".$loisirCom[0] ?> commentaires</p>
 										<p class="date_content"> <?php echo datefr($loisir[6]) ?>  -  <?php echo $loisir[5] ?>
 										<br /><?php echo $loisir[2]."€"?></p>
 										<p class="description_content"> <?php echo $loisir[4] ?> </p>
@@ -111,7 +116,7 @@
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
-				<?php include('../barreLaterale.php'); ?>
+				<?php include('barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

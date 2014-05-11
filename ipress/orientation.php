@@ -8,6 +8,7 @@
 	// On effectue la requête afin d'afficher toutes les annonces de la catégorie événement			
 	$requetOrientation = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND CatAnn='Orientation'";
 	$resultOrientation = mysql_query($requetOrientation) or die ("Erreur de la base de données.");
+
 	// fonction pour convertir la date en format français
 	function datefr($date) { 
 		$split = explode("-",$date); 
@@ -93,7 +94,12 @@
 							<h4>Orientation</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($orientation = mysql_fetch_row($resultOrientation)) { ?>
+						<?php while($orientation = mysql_fetch_row($resultOrientation)) { 
+							// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Orientation 
+							$requeteOrientationCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$orientation[0]'";
+							$resultOrientationCom = mysql_query($requeteOrientationCom) or die ("Erreur de la base de données.");
+							$orientationCom = mysql_fetch_row($resultOrientationCom);
+						?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
 									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$orientation[7].".jpg'/><br />"; ?></a>
@@ -101,7 +107,7 @@
 
 								<div class="grid_8 omega">
 									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$orientation[0]."'>".$orientation[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
+										<h3><?php echo "<a href='annonce.php?id=".$orientation[0]."'>".$orientation[1]."</a>"?> </h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$orientation[0]."#commentaires'>".$orientationCom[0] ?> commentaires</p>
 										<p class="date_content"> <?php echo datefr($orientation[6]) ?>  -  <?php echo $orientation[5] ?>
 										<br /><?php echo $orientation[2]."€"?></p>
 										<p class="description_content"> <?php echo $orientation[4] ?> </p>
@@ -112,7 +118,7 @@
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
-				<?php include('../barreLaterale.php'); ?>
+				<?php include('barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

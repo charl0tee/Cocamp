@@ -93,7 +93,12 @@
 							<h4>Petites Annonces</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($petitesAnnonces = mysql_fetch_row($resultPetitesAnnonces)) { ?>
+						<?php while($petitesAnnonces = mysql_fetch_row($resultPetitesAnnonces)) { 
+							// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Petites annonces
+							$requetePetiteannonceCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$petitesAnnonces[0]'";
+							$resultPetiteannonceCom = mysql_query($requetePetiteannonceCom) or die ("Erreur de la base de données.");
+							$petiteannonceCom = mysql_fetch_row($resultPetiteannonceCom);
+						?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
 									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$petitesAnnonces[7].".jpg'/>"; ?></a>
@@ -101,7 +106,7 @@
 
 								<div class="grid_8 omega">
 									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$petitesAnnonces[0]."'>".$petitesAnnonces[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
+										<h3><?php echo "<a href='annonce.php?id=".$petitesAnnonces[0]."'>".$petitesAnnonces[1]."</a>"?> </h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$petitesAnnonces[0]."#commentaires'>".$petiteannonceCom[0] ?> commentaires</p>
 										<p class="date_content"> <?php echo datefr($petitesAnnonces[6]) ?>  -  <?php echo $petitesAnnonces[5] ?>
 										<br /><?php echo $petitesAnnonces[2]."€"?></p>
 										<p class="description_content"> <?php echo $petitesAnnonces[4] ?> </p>
@@ -112,7 +117,7 @@
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
-				<?php include('../barreLaterale.php'); ?>
+				<?php include('barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

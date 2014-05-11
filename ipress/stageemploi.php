@@ -94,7 +94,12 @@
 							<h4>Stages/Emplois</h4>
 						</div><!-- /title bar -->
 						
-						<?php while($stageEmploi = mysql_fetch_row($resultStageEmploi)) { ?>
+						<?php while($stageEmploi = mysql_fetch_row($resultStageEmploi)) { 
+							// On compte le nombre de commentaires de la dernière annonce affichée sur la page d'accueil pour la catégorie Stage Emploi 
+							$requeteStageEmploiCom = "SELECT COUNT(IdCom) FROM Commentaire WHERE IdAnn='$stageEmploi[0]'";
+							$resultStageEmploiCom = mysql_query($requeteStageEmploiCom) or die ("Erreur de la base de données.");
+							$stageEmploiCom = mysql_fetch_row($resultStageEmploiCom);
+						?>
 							<div class="mbf clearfix article_cat"> <!-- article -->
 								<div class="grid_4 alpha">
 									<a href="annonce.php"><?php echo "<img src='../imgAnnonce/".$stageEmploi[7].".jpg'/><br />"; ?></a>
@@ -102,7 +107,7 @@
 
 								<div class="grid_8 omega">
 									<div class="post_content">
-										<h3><?php echo "<a href='annonce.php?id=".$stageEmploi[0]."'>".$stageEmploi[1]."</a>"?> </h3><p class="com_post"> - 0 commentaires</p>
+										<h3><?php echo "<a href='annonce.php?id=".$stageEmploi[0]."'>".$stageEmploi[1]."</a>"?> </h3><p class="com_post"> - <?php echo "<a href='annonce.php?id=".$stageEmploi[0]."#commentaires'>".$stageEmploiCom[0] ?> commentaires</p>
 										<p class="date_content"> <?php echo datefr($stageEmploi[6]) ?>  -  <?php echo $stageEmploi[5] ?>
 										<br /><?php echo $stageEmploi[2]."€"?></p>
 										<p class="description_content"> <?php echo $stageEmploi[4] ?> </p>
@@ -113,7 +118,7 @@
 					</div><!-- end grid12 -->
 				</div><!-- end grid9 -->
 
-				<?php include('../barreLaterale.php'); ?>
+				<?php include('barreLaterale.php'); ?>
 			</div><!-- /row -->
 		</div><!-- /end page content -->
 

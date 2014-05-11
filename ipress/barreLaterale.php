@@ -9,7 +9,7 @@
 		<ul class="counter clearfix">
 			<li class="twitter">
 				<a href="index.html#"><i class="fa fa-twitter"></i></a>
-				<span> 2545 <br> Followes </span>
+				<span> 2545 <br> Followers </span>
 			</li>
 			<li class="facebook">
 				<a href="index.html#"><i class="fa fa-facebook"></i></a>
@@ -56,14 +56,18 @@
 		<ul class="recent_comments small_posts">
 			
 				<?php 
-				while ($commentaireRecent=mysql_fetch_row($resultComRecent)){					
-					?><li class="clearfix"><div class="commentaireRecent">
+				while ($commentaireRecent=mysql_fetch_row($resultComRecent)){	
+					// On récupère les commentaires$
+					$requetPhotoProfilRecent = "SELECT NomMembre, PrenomMembre, PhotoMembre FROM membre WHERE IdMembre='".$commentaireRecent[1]."'";
+					$resultPhotoProfilRecent = mysql_query($requetPhotoProfilRecent) or die ("Erreur de la base de données.");
+					$photoProfilRecent=mysql_fetch_row($resultPhotoProfilRecent);	
+					?><a href="annonce.php?id=<?php echo $commentaireRecent[2]; ?>#commentaires"><li class="clearfix"><div class="commentaireRecent">
 						<div class="photoProfil"><?php
-						echo "<img width='80' height'80' src='../imgProfil/".$photoProfil[2].".jpg'>";
+						echo "<img width='80' height'80' src='../imgProfil/".$photoProfilRecent[2].".jpg'>";
 					?></div> <?php	
-						echo "<p><strong>".$photoProfil[1]." ".$photoProfil[0]."</strong></p>";
+						echo "<p><strong>".$photoProfilRecent[1]." ".$photoProfilRecent[0]."</strong></p>";
 						echo "<p>".substr($commentaireRecent[3], 0, 15)."</p>";
-					?></div></li><?php	
+					?></div></a></li><?php	
 				} 
 				?>
 			
