@@ -327,6 +327,7 @@
 											<input type="hidden" name="idProfil" value="<?php echo $profil[0] ?>">
 											<input type="hidden" name="idAnnonce" value="<?php echo $idSelect ?>">
 											<textarea id="inputcom" name="post_com" cols="100" rows="3" placeholder="Votre commentaire"></textarea>
+											<br />
 											<button id="submitmessage" type="submit">Envoyer</button>
 										</form><!-- /form -->
 									</div><br/><!-- /s form -->
@@ -378,15 +379,6 @@
 		<script type="text/javascript" src="js/custom.js"></script>
 		<script type="text/javascript">
 		/* <![CDATA[ */
-
-			// Disqus
-			var disqus_shortname = 'officialtemplate'; 
-			(function () {
-				var s = document.createElement('script'); s.async = true;
-				s.type = 'text/javascript';
-				s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-				(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-			}());
 			function date_time(id){
 				date = new Date;
 				year = date.getFullYear();
