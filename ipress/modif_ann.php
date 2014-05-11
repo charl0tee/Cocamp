@@ -127,7 +127,12 @@
 									if($affiche[5]==$_SESSION['mail']){
 
 										// On affiche un formulaire pré-rempli avec les données déjà rentrées dans la bdd
-										echo "<form method='post' action=''>
+										echo "<div id='alert3'>
+											<button type='button' class='close-alert'>x</button>
+											<p id='text-alert3'></p>
+										</div>
+
+										<form method='post' action=''>
 										<h2>Localisation</h2>
 										
 										<p>Ville : 
@@ -157,7 +162,7 @@
 										<p>Description :<br /> <textarea rows='10' cols='50' name='DescrAnn'>".$affiche[2]."</textarea></p>	
 										<p>Prix : <input type='number' name='PrixAnn' value='".$affiche[3]."'/>€</p>
 									
-										<input type='submit' name='Valider' value='Valider'/>";
+										<input type='submit' class='submitform' name='Valider' value='Valider'/>";
 										
 										// Si le formulaire a été validé, alors on modifie l'annonce sélectionnée et on affiche un message au membre
 										if (isset($_POST['Valider'])){
@@ -182,18 +187,20 @@
 												// on redirige notre visiteur vers la page de l'annonce
 												echo "<script>window.location.replace('annonce.php?id=".$idSelect."');</script>";
 											}
-											else {
-												echo "<script>alert('Veuillez remplir tous les champs.');</script>";
-												// on redirige notre visiteur vers la page de l'annonce
-												echo "<script>window.location.replace('annonce.php?id=".$idSelect."')</script>";
-											}
+											else { ?>
+												<script type="text/javascript">
+													document.getElementById("alert3").style.display = "block";
+													document.getElementById("text-alert3").innerHTML = "Veuillez remplir tous les champs.";
+												</script>
+											<?php }
 										}
 									}
-									else{
-										echo "<script>alert('Vous n'êtes pas propriétaire de cette annonce.');</script>";
-										// on redirige notre visiteur vers la page de l'annonce
-										echo "<script>window.location.replace('index.php')</script>";
-									}
+									else{ ?>
+										<script type="text/javascript">
+											document.getElementById("alert3").style.display = "block";
+											document.getElementById("text-alert3").innerHTML = "Vous n'êtes pas propriétaire de cette annonce.";
+										</script>
+									<?php }
 								}
 							?>	
 												

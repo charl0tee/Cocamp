@@ -49,22 +49,26 @@
 						<div class="single_post mbf clearfix">
 							<?php while($affiche = mysql_fetch_row($result)) {
 									// On affiche un formulaire pré-rempli avec les données déjà rentrées dans la bdd
-									echo "<form method='post' action=''>
+									echo "<div id='alert4'>
+										<button type='button' class='close-alert'>x</button>
+										<p id='text-alert4'></p>
+									</div>
+									<form method='post' action=''>
 									
 									<p>Nom : <input type='text' name='nom' value='".$affiche[1]."'/></p>
 									<p>Prénom : <input type='text' name='prenom' value='".$affiche[2]."'/></p>
-									<p>Age : <input type='text' name='age' maxlength='2' value='".$affiche[6]."'/></p>
+									<p>Age : <input type='number' name='age' maxlength='2' value='".$affiche[6]."'/></p>
 									<p>Formation : <input type='text' name='formation' value='".$affiche[5]."'/></p>
 									<p>Mail : <input type='text' name='mail' value='".$affiche[4]."'/></p>
 									<p>Mot de passe : <input type='password' name='mdp_inscript' value='".$affiche[3]."'/></p>
 								
-									<input type='submit' name='Valider' value='Valider'/>";
+									<input type='submit' class='submitform' name='Valider' value='Valider'/>";
 									
 									// Si le formulaire a été validé, alors on modifie les informations du membre et on affiche un message au membre
 									if (isset($_POST['Valider'])){
 										
 										// On vérifie si tous les champs sont remplis
-										if (isset($_POST['age']) && isset($_POST['formation']) && isset($_POST['mdp_inscript']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail'])){
+										if (!empty($_POST['age']) && !empty($_POST['formation']) && !empty($_POST['mdp_inscript']) && !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['mail'])){
 									
 											// Mise à jour des informations du membre
 											$age=$_POST['age'];
@@ -86,17 +90,19 @@
 												// on redirige notre visiteur vers la page de l'annonce
 												echo "<script>window.location.replace('profil.php?id=".$idSelect."');</script>";
 											}
-											else { 
-												echo "<script>alert('Ce mail est déjà utilisé.');</script>";
-												// on redirige notre visiteur vers la page pour s'inscrire
-												echo "<script>window.location.replace('modif_profil.php?id=".$idSelect."');</script>";
-											}
+											else { ?>
+												<script type="text/javascript">
+													document.getElementById("alert4").style.display = "block";
+													document.getElementById("text-alert4").innerHTML = "Ce mail est déjà utilisé.";
+												</script>
+											<?php }
 										}
-										else {
-											echo "<script>alert('Veuillez remplir tous les champs.');</script>";
-											// on redirige notre visiteur vers la page de l'annonce
-											echo "<script>window.location.replace('modif_profil.php?id=".$idSelect."')</script>";
-										}
+										else { ?>
+											<script type="text/javascript">
+												document.getElementById("alert4").style.display = "block";
+												document.getElementById("text-alert4").innerHTML = "Veuillez remplir tous les champs.";
+											</script>
+										<?php }
 									}
 								}
 							?>	

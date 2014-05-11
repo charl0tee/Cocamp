@@ -2752,19 +2752,24 @@ p.description{
 	margin-bottom: 20px;
 }
 
-#envoyermessage, #submitmessage{
+#envoyermessage, #submitmessage, .submitform{
 	background-color: #888888;
 	padding: 10px;
 	color: #fff;
+	cursor: pointer;
 }
 
-#envoyermessage:hover, #submitmessage:hover{
+#envoyermessage:hover, #submitmessage:hover, .submitform:hover{
 	color: #353535;
 }
 
 #submitmessage{
 	border: 0;
 	margin-top: 20px;
+}
+
+.submitform{
+	border: 0;
 }
 
 .notifications-message{
@@ -2805,4 +2810,29 @@ p.description{
 
 .commentaireRecent p{
 	margin-bottom: 10px;
+}
+
+/* ALERTES */
+#alert, #alert2, #alert3, #alert4{
+	background-color: #f2dede;
+	border: 1px solid #ebccd1;
+	color: #a94442;
+	padding: 15px;
+	border-radius: 4px;
+	width: 90%;
+	height: 20px;
+	margin: 20px 0;
+	display: none;
+}
+
+#alert button, #alert2 button, #alert3 button, #alert4 button{
+	cursor: pointer;
+	float: right;
+	font-size: 21px;
+	font-weight: 700;
+	color: #000;
+	line-height: 1;
+	opacity: 0.2;
+	border: 0;
+	background: none;
 }

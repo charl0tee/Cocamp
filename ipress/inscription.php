@@ -41,21 +41,110 @@
 
 						<div class="single_post mbf clearfix">
 							<h3 class="single_title">Inscrivez-vous</h3>
-							<form method='post' action='../login_inscript.php' ENCTYPE='multipart/form-data'>
+							
+							<div id="alert">
+								<button type="button" class="close-alert">x</button>
+								<p id="text-alert"></p>
+							</div>
+
+							<form method='post' action='' ENCTYPE='multipart/form-data'>
 								<h2>S'inscrire</h2>
 								<p>Nom : <input type='text' name='nom' /></p>
 								<p>Prénom : <input type='text' name='prenom' /></p>
-								<p>Age : <input type='text' name='age' maxlength="2"/></p>
+								<p>Age : <input type='number' name='age' maxlength="2"/></p>
 								<p>Formation : <input type='text' name='formation' /></p>
 								<p>Mail : <input type='text' name='mail' /></p>
 								<p>Mot de passe : <input type='password' name='mdp_inscript' /></p>
 								<p>
-									Image : <input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
+									Image (taille maximum : 1,5 Mo) <input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
 									<input type='file' name='image' />
 								</p>
-								<input type='submit' value='Valider' />
+								<input class="submitform" type='submit' name="Valider" value='Valider' />
 							</form>
-												
+
+							<?php
+								// Si le formulaire a été validé
+								if (isset($_POST['Valider'])){
+								
+									// On vérifie si tous les champs sont remplis
+									if (!empty($_POST['age']) && !empty($_POST['formation']) && !empty($_POST['mdp_inscript']) && !empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['mail'])){
+
+										//On déclare des variables 
+										$age=$_POST['age'];
+										$formation=$_POST['formation'];
+										$mdp_inscript=$_POST['mdp_inscript'];
+										$prenom=$_POST['prenom'];
+										$nom=$_POST['nom'];
+										$mail=$_POST['mail'];
+										
+										//On vérifie si le mail n'existe pas déjà
+										$requet_exist = "SELECT * FROM Membre WHERE MailMembre='$mail'"; 
+										$result = mysql_query($requet_exist) or die("Erreur de base de données.");
+										$num = mysql_num_rows($result);
+										
+										if ($num == 0){
+
+											// si une image a été ajoutée :
+											if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+												// vérification de la taille
+												if(($_FILES['image']['size'] <= $_POST['MAX_FILE_SIZE'])){
+													// on récupère l'id du dernier membre inscrit pour renommer les images selon l'id du membre
+													$reqId = "SELECT * FROM Membre ORDER BY IdMembre Desc LIMIT 1"; 
+													$resId = mysql_query($reqId);
+													$idmax = mysql_fetch_row($resId);
+													//echo ($idmax[0]);
+													$newname = $idmax[0]+1;
+
+													// On déplace l'image dans le dossier imgProfil
+													$uploads_dir = 'imgProfil';
+													$tmp_name = $_FILES["image"]["tmp_name"];
+											        move_uploaded_file($tmp_name, "$uploads_dir/$newname.jpg");
+													
+													$requet = "INSERT INTO Membre (NomMembre, PrenomMembre, MdpMembre, MailMembre, ScolMembre, AgeMembre, PhotoMembre) values ('$nom', '$prenom', '".mysql_real_escape_string($mdp_inscript)."', '".mysql_real_escape_string($mail)."', '$formation', '$age', '".mysql_real_escape_string($newname)."')";
+													mysql_query($requet) or die("erreur requête".mysql_error());
+													//Enregistrement réussi
+													// on démarre la session
+													session_start ();
+													// on enregistre les paramètres de notre visiteur comme variables de session
+													$_SESSION['mail'] = $mail;
+													$_SESSION['prenom'] = $prenom;
+
+													//Redirection vers la page d'accueil
+													echo "<script>
+													window.location.replace('index.php');
+													</script> ";
+													
+												}
+												else{ ?>
+				 									<script type="text/javascript">
+														document.getElementById("alert").style.display = "block";
+														document.getElementById("text-alert").innerHTML = "Problème avec le format de l'image.";
+													</script>
+												<?php }
+											}	
+											else { ?>
+													<script type="text/javascript">
+														document.getElementById("alert").style.display = "block";
+														document.getElementById("text-alert").innerHTML = "Vous n'avez pas ajouté d'image.";
+													</script>
+											<?php }
+										}
+										else { ?>
+												<script type="text/javascript">
+													document.getElementById("alert").style.display = "block";
+													document.getElementById("text-alert").innerHTML = "Ce mail est déjà utilisé.";
+												</script>
+										<?php }
+									}
+									else {
+							?>
+									
+									<script type="text/javascript">
+										document.getElementById("alert").style.display = "block";
+										document.getElementById("text-alert").innerHTML = "Veuillez remplir tous les champs.";
+									</script>
+
+							<?php } }?>										
 						</div><!-- /single post -->
 					</div><!-- end grid8 -->
 				</div><!-- end grid9 -->

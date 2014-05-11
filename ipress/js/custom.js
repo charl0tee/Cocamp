@@ -219,6 +219,20 @@ jQuery(document).ready(function ($) {
 		}
 	});*/
 
+	// alertes
+	$("#alert button.close-alert").click(function(){
+		$("#alert").slideUp();
+	});
+	$("#alert2 button.close-alert").click(function(){
+		$("#alert2").slideUp();
+	});
+	$("#alert3 button.close-alert").click(function(){
+		$("#alert3").slideUp();
+	});
+	$("#alert4 button.close-alert").click(function(){
+		$("#alert4").slideUp();
+	});
+	
 	// Notification
 	$(".notification-close").click(function () {
 		$(this).parent().slideUp("slow");
