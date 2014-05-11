@@ -5,61 +5,12 @@
 
 	mysql_query("SET NAMES 'utf8'"); //Fonction qui convertit toutes les entrées textuelles en utf-8 pour la BDD
 	
-	// On récupère l'ID du membre sur lequel l'utilisateur a cliqué
+	// On récupère l'id du profil à modifier (depuis l'url)
 	$idSelect = $_GET['id'];
 
-	//Requête pour afficher les données du membre
-	$requet_membre="SELECT NomMembre, PrenomMembre, MailMembre, ScolMembre, AgeMembre, PhotoMembre FROM Membre WHERE IdMembre='".$idSelect."'";
-	$result_membre=mysql_query($requet_membre) or die("Erreur de base de données.");
-	$membre=mysql_fetch_row($result_membre);	
-	// On effectue les requêtes afin d'afficher les annonces postées par le membre			
-	$requet = "SELECT Annonce.IdAnn, Annonce.TitreAnn, Annonce.PrixAnn, Annonce.CatAnn, Annonce.DescrAnn, Localisation.VilleLocal, Annonce.DateAnn, Image.UrlImage FROM Annonce, Localisation, Image, Membre WHERE Localisation.IdLocal=Annonce.IdLocal AND Image.IdAnn=Annonce.IdAnn AND Membre.IdMembre=Annonce.IdMembre AND Membre.IdMembre='".$idSelect."'ORDER BY Annonce.IdAnn DESC";
+	// On effectue une requête afin d'afficher les informations du profil du membre			
+	$requet = "SELECT * FROM Membre WHERE IdMembre='".$idSelect."'";
 	$result = mysql_query($requet) or die ("Erreur de la base de données.");
-	// fonction pour convertir la date en format français et en format texte
-	function datefr($date) { 
-		$split = explode("-",$date); 
-		$annee = $split[0]; 
-		$mois = $split[1]; 
-		$jour = $split[2];
-		switch ($mois){
-	        case 01:
-                $moistxt = ' janvier ';
-                break;
-			case 02:
-                $moistxt = ' février ';
-                break;
-	        case 03:
-                $moistxt = ' mars ';
-                break;
-	        case 04:
-                $moistxt = ' avril ';
-                break;
-	        case 05:
-                $moistxt = ' mai ';
-                break;
-	        case 06:
-                $moistxt = ' juin ';
-                break;
-	        case 07:
-                $moistxt = ' juillet ';
-                break;
-	        case 08:
-                $moistxt = ' août ';
-                break;
-	        case 09:
-                $moistxt = ' septembre ';
-                break;
-	        case 10:
-                $moistxt = ' octobre ';
-                break;
-			case 11:
-                $moistxt = ' novembre ';
-                break;
-			case 12:
-                $moistxt = ' décembre ';
-		}
-		return "$jour"." "."$moistxt"." "."$annee";
-	}
 ?>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie8" lang="en"><![endif]-->
@@ -96,59 +47,60 @@
 					<div class="grid_12 alpha posts">
 
 						<div class="single_post mbf clearfix">
-							<div class="mbf clearfix article_cat">
-								<h3 class="single_title">
-									<?php if ($_SESSION['mail'] == $membre[2]) { ?>
-										<a href="modif_profil.php?id=<?php echo $idSelect; ?>"><i class="icon-document-edit mi"></i></a>
-										<a href="../supprim_profil.php?id=<?php echo $idSelect; ?>"><i class="icon-trash mi"></i></a>
-									<?php }	?>
-								</h3>
-								<div class="grid_4 alpha">
-									<?php //On affiche l'image du profil
-										echo "<img src='../imgProfil/".$membre[5].".jpg'/><br />";
-									?>	
-								</div>
-								<div class="grid_8 omega">
-									<h4 class="h4float">Prénom : </h4><p class="pfloat profil">
-									<?php // On affiche le prénom
-										echo $membre[1];
-									?></p>
-									<h4 class="h4float">Nom : </h4><p class="pfloat profil">
-									<?php // On affiche le nom
-										echo $membre[0];
-									?></p>
-									<h4 class="h4float">Mail :</h4><p class="pfloat profil">
-									<?php  //On affiche le mail
-										echo $membre[2];
-									?></p>	
-									<h4 class="h4float">Scolarité : </h4><p class="pfloat profil"><?php  
-										// On affiche la scolarité
-										echo $membre[3];
-									?></p>
-									<h4 class="h4float">Age : </h4><p class="pfloat profil"><?php  	
-										// On affiche l'age
-										echo $membre[4];
-									?></p>
-								</div>	
-							</div>	
-							<h4>Mes annonces :</h4> 
-							<p class="pfloat annonce"><?php // On affiche la liste des annonces
-									while($affiche = mysql_fetch_row($result)) {
-										// le lien renvoie vers l'annonce sélectionnée grâce à l'ID récupéré par la méthode GET
-										?> 
-										<div class="mbf clearfix article_cat"> <!-- article -->
-											<div class="grid_4 alpha"><?php	
-												echo "<img src='../imgAnnonce/".$affiche[7].".jpg'/><br />";?>
-											</div>
-											<div class="grid_8 omega"> <?php
-												echo "<a href='annonce.php?id=".$affiche[0]."'>".$affiche[1]." - ".$affiche[3]."</a><br />".datefr($affiche[6])." - ".$affiche[5]."<br />".$affiche[2]." €<br />".$affiche[4]."<br />";?>
-											</div>
-										</div>	
-											<?php
+							<?php while($affiche = mysql_fetch_row($result)) {
+									// On affiche un formulaire pré-rempli avec les données déjà rentrées dans la bdd
+									echo "<form method='post' action=''>
+									
+									<p>Nom : <input type='text' name='nom' value='".$affiche[1]."'/></p>
+									<p>Prénom : <input type='text' name='prenom' value='".$affiche[2]."'/></p>
+									<p>Age : <input type='text' name='age' maxlength='2' value='".$affiche[6]."'/></p>
+									<p>Formation : <input type='text' name='formation' value='".$affiche[5]."'/></p>
+									<p>Mail : <input type='text' name='mail' value='".$affiche[4]."'/></p>
+									<p>Mot de passe : <input type='password' name='mdp_inscript' value='".$affiche[3]."'/></p>
+								
+									<input type='submit' name='Valider' value='Valider'/>";
+									
+									// Si le formulaire a été validé, alors on modifie les informations du membre et on affiche un message au membre
+									if (isset($_POST['Valider'])){
+										
+										// On vérifie si tous les champs sont remplis
+										if (isset($_POST['age']) && isset($_POST['formation']) && isset($_POST['mdp_inscript']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail'])){
+									
+											// Mise à jour des informations du membre
+											$age=$_POST['age'];
+											$formation=$_POST['formation'];
+											$mdp_inscript=$_POST['mdp_inscript'];
+											$prenom=$_POST['prenom'];
+											$nom=$_POST['nom'];
+											$mail=$_POST['mail'];
 
-									} 
-								?>
-							</p>
+											//On vérifie si le mail n'existe pas déjà
+											$requet_exist = "SELECT * FROM Membre WHERE MailMembre='$mail' AND IdMembre!='".$idSelect."'"; 
+											$result_exist = mysql_query($requet_exist) or die("Erreur de base de données.");
+											$num = mysql_num_rows($result_exist);
+											if ($num == 0){
+												$requetmodifprofil="UPDATE Membre SET NomMembre='".mysql_real_escape_string($nom)."', PrenomMembre='".mysql_real_escape_string($prenom)."', MdpMembre='".mysql_real_escape_string($mdp_inscript)."', MailMembre='".mysql_real_escape_string($mail)."', ScolMembre='".mysql_real_escape_string($formation)."', AgeMembre='".mysql_real_escape_string($age)."' WHERE IdMembre='".$idSelect."'";	
+												mysql_query($requetmodifprofil) or die("erreur requête".mysql_error());
+												
+												echo "<script>alert('Votre profil a été modifié avec succès.');</script>";
+												// on redirige notre visiteur vers la page de l'annonce
+												echo "<script>window.location.replace('profil.php?id=".$idSelect."');</script>";
+											}
+											else { 
+												echo "<script>alert('Ce mail est déjà utilisé.');</script>";
+												// on redirige notre visiteur vers la page pour s'inscrire
+												echo "<script>window.location.replace('modif_profil.php?id=".$idSelect."');</script>";
+											}
+										}
+										else {
+											echo "<script>alert('Veuillez remplir tous les champs.');</script>";
+											// on redirige notre visiteur vers la page de l'annonce
+											echo "<script>window.location.replace('modif_profil.php?id=".$idSelect."')</script>";
+										}
+									}
+								}
+							?>	
+												
 						</div><!-- /single post -->
 					</div><!-- end grid8 -->
 				</div><!-- end grid9 -->
@@ -184,7 +136,7 @@
 							
 									<tfoot>
 										<tr>
-											<td colspan="3" id="prev"><a href="index.html#" title="View posts for December 2013">« Dec</a></td>
+											<td colspan="3" id="prev"><a href="index.html#" title="">« Dec</a></td>
 											<td class="pad">&nbsp;</td>
 											<td colspan="3" id="next" class="pad">&nbsp;</td>
 										</tr>

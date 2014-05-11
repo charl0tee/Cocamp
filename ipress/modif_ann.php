@@ -112,14 +112,13 @@
 
 						<div class="single_post mbf clearfix">
 							<h3 class="single_title">
-							<a href="../annonce.php">
 							<?php // On affiche le titre de l'annonce sélectionnée
 								echo $titre[0]."<br />";
-							?></a> </h3>
-							<div class="meta mb"> postée par <a href="../profil.php">
+							?></h3>
+							<div class="meta mb"> postée par 
 								<?php // On affiche le nom et prénom du membre et la date de l'annonce sélectionnée
 									echo $membre[2]." ".$membre[1];
-								?></a> le <?php echo datefr($dateAnn[0]) ?>
+								?> le <?php echo datefr($dateAnn[0]) ?>
 							</div>
 
 							<?php while($affiche = mysql_fetch_row($result)) {

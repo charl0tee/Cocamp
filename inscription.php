@@ -23,7 +23,7 @@
 					<p>Mail : <input type='text' name='mail' /></p>
 					<p>Mot de passe : <input type='password' name='mdp_inscript' /></p>
 					<p>
-						Image : <input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
+						Image (taille maximum : 1,5 Mo) : <input type='hidden' name='MAX_FILE_SIZE' value='10000000' />
 						<input type='file' name='image' />
 					</p>
 					<input type='submit' value='Valider' />

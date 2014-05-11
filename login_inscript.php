@@ -79,7 +79,7 @@
 					echo "<script>window.location.replace('ipress/inscription.php');</script>";
 				}
 			}
-			else { 
+			else {
 				echo "<script>alert('Veuillez remplir tous les champs.');</script>";
 				// on redirige notre visiteur vers la page pour s'inscrire
 				echo "<script>window.location.replace('ipress/inscription.php');</script>";

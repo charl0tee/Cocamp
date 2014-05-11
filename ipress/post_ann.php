@@ -73,11 +73,10 @@
 								<p>Description :<br /> <textarea rows='10' cols='50' name='DescrAnn'></textarea></p>	
 								<p>Prix : <input type='number' name='PrixAnn'/> €</p>
 								<p>
-									Image* (taille maximum : 1,5 Mo) <!--<input type='hidden' name='MAX_FILE_SIZE' value='8000000 ' />-->
+									Image (taille maximum : 1,5 Mo) <!--<input type='hidden' name='MAX_FILE_SIZE' value='8000000 ' />-->
 									<input type='file' name='image' /> 
 								</p>
-								<input type='submit' value='Valider'/>	
-								<p>* champ obligatoire</p>
+								<input type='submit' value='Valider'/>
 							</form>
 												
 						</div><!-- /single post -->
