@@ -9,7 +9,8 @@
 		$commentaire=$_POST['post_com'];
 		$idAnn=$_POST['idAnnonce'];
 		$idProfil=$_POST['idProfil'];
-		$DateCom=date("Y-m-d H:i:s");
+		$heure = date("H")+2; //ajustement de l'heure avec phpMyAdmin
+		$DateCom=date("Y-m-d ".$heure.":i:s");
 	
 		$requetCommentaire="INSERT INTO Commentaire (IdMembre, IdAnn, ContenuCom, DateCom) values ('$idProfil', '$idAnn', '".mysql_real_escape_string($commentaire)."', '$DateCom')";	
 		mysql_query($requetCommentaire) or die("erreur requête".mysql_error());
